@@ -90,14 +90,28 @@ nav ul {
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
+	/* curseur de la souris en forme de main qui sera affiché au survol,
+       indiquant que l'élément est cliquable */
 }
 
 li:hover {
 	color: #B1663C;
 }
+
+/* Changement les dimensions de logo insta qui ce trouve dans header Nav */
+#logo-insta {
+	width: 20px;
+	height: 20px;
+}
+
+
+
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -183,6 +197,6 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
 

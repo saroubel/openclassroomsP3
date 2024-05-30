@@ -10,7 +10,10 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
+
+
 <body>
+
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -18,11 +21,15 @@
 			<li>projets</li>
 			<li>contact</li>
 			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram" id="logo-insta"></li>
+				<!-- Add id pour changer les dimensions de logo insta comme la maquette-->
 		</ul>
 	</nav>
 </header>
+
+
 <main>
+	
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
@@ -34,8 +41,26 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+
+
+<!-- où le JS ajoutera le contenu dynamique pour gallery & filters-->
 	<section id="portfolio">
+
+		<div class="portfolio_title">
 		<h2>Mes Projets</h2>
+		</div>
+
+		<div class="filters"></div>
+		<div class="gallery"></div>
+
+	</section>
+
+<!-- supprimer le code HTML statique qui représente les travaux de l'architecte  -->
+<!--  
+	<section id="portfolio">
+
+		<h2>Mes Projets</h2>
+
 		<div class="gallery">
 			<figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
@@ -81,8 +106,12 @@
 				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 				<figcaption>Hotel First Arte - New Delhi</figcaption>
 			</figure>
-		</div>
+		</div> 
 	</section>
+-->
+
+
+
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
@@ -96,7 +125,9 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+
 </main>
+
 
 <footer>
 	<nav>
@@ -105,5 +136,7 @@
 		</ul>
 	</nav>
 </footer>
+
+
 </body>
 </html>
