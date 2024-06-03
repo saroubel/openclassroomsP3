@@ -103,13 +103,21 @@ li:hover {
 	color: #B1663C;
 }
 
+/* Ajout du style pour le lien naviguation header */
+nav a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: #B1663C;
+}
+
 /* Changement les dimensions de logo insta qui ce trouve dans header Nav */
 #logo-insta {
 	width: 20px;
 	height: 20px;
 }
-
-
 
 
 #introduction {
@@ -199,4 +207,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em;
 }
-
