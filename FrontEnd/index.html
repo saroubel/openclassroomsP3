@@ -9,6 +9,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+
+	<!-- pour préciser le chemin des fichier JS -->   
+		<!-- defer: charger les scripts en arrière-plan sans bloquer le rendu de la page -->
+	<script src="./assets/script/index.js" defer></script> 
+	<script src="./assets/script/login.js" defer></script>
+		
 </head>
 
 
@@ -18,15 +24,15 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
+			<!-- Ajout les liens de navigation dans les li de header -->
+			<li><a href="#portfolio">projets</a></li>
+			<li><a href="#contact">contact</a></li>
 			<li>login</li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram" id="logo-insta"></li>
 				<!-- Add id pour changer les dimensions de logo insta comme la maquette-->
 		</ul>
 	</nav>
 </header>
-
 
 <main>
 	
@@ -51,6 +57,7 @@
 		</div>
 
 		<div class="filters"></div>
+
 		<div class="gallery"></div>
 
 	</section>

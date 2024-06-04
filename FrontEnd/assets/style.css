@@ -103,13 +103,21 @@ li:hover {
 	color: #B1663C;
 }
 
+/* Ajout du style pour le lien naviguation header */
+nav a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: #B1663C;
+}
+
 /* Changement les dimensions de logo insta qui ce trouve dans header Nav */
 #logo-insta {
 	width: 20px;
 	height: 20px;
 }
-
-
 
 
 #introduction {
@@ -135,6 +143,37 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/****** Les Filtres Partie catégories */
+.filters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin: 40px;
+}
+
+.filters_btn {
+	/* style btn */
+	background-color: white;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding: 8px 16px;
+    min-width: 100px;
+	cursor: pointer;
+
+	/* txt du bouton */
+	color: #1D6154;
+    font-family: 'Syne';
+    font-size: 16px;
+	font-weight: 700;
+}
+
+.filters_btn:hover {
+	background-color: #1D6154;
+	color: white;
+}
+
+/****** Portfolio Partie Galerie */
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -199,4 +238,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em;
 }
-
