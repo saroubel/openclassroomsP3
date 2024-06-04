@@ -28,10 +28,47 @@ async function getCategories() {
           } )
 };
 
+//-----Création des bouttons dynamiquement pour les catégories
+function createButtonCatg(){
+
+    //recup le conteneur html avec la classe filters où les btn seront ajoutés
+    let filters = document.querySelector('.filters')
+  
+    //btn tous 
+    let btnTous = document.createElement("button");
+    //ajout des attributs
+    btnTous.textContent = "Tous";
+    btnTous.setAttribute("name", "Tous");
+    btnTous.setAttribute("type", "button");
+    btnTous.classList.add("filters_btn");
+    //ajout du boutton dans le conteneur filters
+    filters.appendChild(btnTous);
+    
+    //btn categories
+    //boucle pour ajouter les btn pour chaque catégorie
+    for (let i=0; i<categories.length; i++){
+  
+        // creation du btn
+        let btnCategorie = document.createElement("button")  
+        //ajout des attributs
+        btnCategorie.setAttribute("name",categories[i].name)
+        btnCategorie.setAttribute("type","button")
+        btnCategorie.classList += "filters_btn"
+  
+        //ajout le txt des noms dans les btn depuis le tab de catégories
+        btnCategorie.textContent=categories[i].name
+  
+        //ajout du boutton dans le conteneur filters
+        filters.appendChild(btnCategorie)
+    }
+  }
+  
+
 //-----Fonction initialisation
 async function init() {
     await getWorks();
     await getCategories();
+    createButtonCatg();
   };
   // appel pour l'initialisation
   init(); 
