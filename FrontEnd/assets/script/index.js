@@ -1,6 +1,5 @@
 
 //---Récupération les données depuis l'API---// 
-
 //-----Récupération les données Works 
 let listWorks = []                                          // variable initialisée à un tab vide pour stocker les données                              
 async function getWorks() {                                 // exécute des opérations bloquantes en arrière-plan sans bloquer le thread d'exécution principal
@@ -63,12 +62,35 @@ function createButtonCatg(){
     }
   }
   
+//-----Afficher tout les works dynamiquement
+function showAllWorks(){  
+
+  //recup le conteneur html avec la classe gallery où les works seront ajoutés
+  let gallery = document.querySelector('.gallery')
+  
+  //boucle pour afficher les works
+  for(let i = 0; i < listWorks.length; i++) {
+
+      //afficher les works - pour tester
+      // console.log(listWorks[i])
+
+      // ajouter du contenu HTML pour les works dans le conteneur gallery
+      gallery.innerHTML += 
+      `<figure class="gallery_pic">
+      <img src="${listWorks[i].imageUrl}" alt="${listWorks[i].title}">
+      <figcaption>${listWorks[i].title}</figcaption>
+      </figure>`
+  }
+}
+
+
 
 //-----Fonction initialisation
 async function init() {
     await getWorks();
     await getCategories();
     createButtonCatg();
+    showAllWorks();
   };
   // appel pour l'initialisation
   init(); 

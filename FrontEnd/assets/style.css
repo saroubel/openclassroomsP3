@@ -190,6 +190,20 @@ a:hover {
 	width: 100%;
 
 }
+
+/* titre sous l'image  */
+.gallery figcaption {
+	margin-top: 10px;
+}
+
+/* .gallery_pic{
+	width: 305px;
+	height: 407px;
+} */
+
+
+
+/****** Partie Contact */
 #contact {
 	width: 50%;
 margin: auto;
