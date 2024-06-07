@@ -46,7 +46,7 @@ function createButtonCatg(){
     // ajout class au btn
     btnTous.classList.add("filters_btn")  
 
-    ////////////
+    //----------//
     // click et fonction filterByCatg pour btn Tous
     btnTous.addEventListener('click', function () { 
       filterByCatg("Tous") 
@@ -54,7 +54,7 @@ function createButtonCatg(){
      
      }
     )
-    
+
     // ajout du btn dans le conteneur filters
     filters.appendChild(btnTous)
     
@@ -75,7 +75,7 @@ function createButtonCatg(){
       //ajout le txt des noms dans les btn depuis le tab de catégories
       btnCategorie.textContent=categories[i].name
 
-      //////////////
+      //----------//
       //click et fonction filterByCatg pour chaque catégorie
       btnCategorie.addEventListener('click', function () {
 
