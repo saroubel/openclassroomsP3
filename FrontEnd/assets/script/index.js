@@ -94,7 +94,7 @@ function createButtonCatg(){
 
 
 
-//-----Afficher Gallery de tout les works dynamiquement avec photo et titre
+//-----Afficher Gallery de tout les works dynamiquement avec photo et titre--Manipulation du DOM en JS
 function showAllWorks(){  
 
   //recup le conteneur html avec la classe gallery où les works seront ajoutés
@@ -102,16 +102,34 @@ function showAllWorks(){
   
   //afficher les works 
   for(let i = 0; i < listWorks.length; i++) {
-
-      //pour tester l'affichage des works
       // console.log(listWorks[i])
 
-      // ajouter du contenu HTML pour les works dans le conteneur gallery
-      gallery.innerHTML += 
-      `<figure class="gallery_pic">
-      <img src="${listWorks[i].imageUrl}" alt="${listWorks[i].title}">
-      <figcaption>${listWorks[i].title}</figcaption>
-      </figure>`
+      //creation d'une figure où les img et titres seront ajoutés
+      let figureGallery = document.createElement("figure")
+      let imageGallery = document.createElement("img") 
+      let titleGallery = document.createElement("figcaption")
+
+      // ajout des attributs à l'image
+      imageGallery.setAttribute("src",listWorks[i].imageUrl)
+      imageGallery.setAttribute("alt",listWorks[i].title)
+      // ajout txt dans le figcaption
+      titleGallery.textContent = listWorks[i].title
+
+      //ajout class gallery_pic
+      figureGallery.classList.add("gallery_pic")
+
+      //ajout des img et titres dans le conteneur gallery
+      gallery.appendChild(figureGallery)
+      figureGallery.appendChild(imageGallery)
+      figureGallery.appendChild(titleGallery)
+
+
+      //-----autre méthode
+        // gallery.innerHTML += 
+        // `<figure class="gallery_pic">
+        // <img src="${listWorks[i].imageUrl}" alt="${listWorks[i].title}">
+        // <figcaption>${listWorks[i].title}</figcaption>
+        // </figure>`
   }
 }
 
