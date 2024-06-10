@@ -43,17 +43,19 @@
 	<form class="login">
         
     	<label for="email">E-mail</label>
-    	<input type="email" name="email" id="email-bar" required>   <!-- attribut required pour que le champ soit obligatoire -->
+    	<input type="email" name="email" id="email-bar" required onchange="checkEmail()">   
 
     	<label for="password">Mot de passe</label>
-    	<input type="password" name="password" id="password-bar" required>
+    	<input type="password" name="password" id="password-bar" required onchange="checkPassword()">
 
     	<input type="submit" value="Se connecter">
 	</form>
+	<!-- required : soit obligatoire -->
+	<!-- onchange : alert lors du changement -->
 
    	<a href="#" id ="forgot-password">Mot de passe oublié</a>
 
-
+	
 </main>
 
 
