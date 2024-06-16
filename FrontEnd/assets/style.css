@@ -199,6 +199,16 @@ a:hover {
 	align-items: center;
 }
 
+/* modifier - icone */
+.portfolio_title .fa-regular , .fa-pen-to-square {
+	color: black;
+	font-size: 16px;
+	height: 30px;
+	margin-left: 40px;
+	display: flex;
+    align-items: center;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
