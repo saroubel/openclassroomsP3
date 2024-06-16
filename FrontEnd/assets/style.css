@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+	line-height: 1; 
 }
 ol, ul {
 	list-style: none;
@@ -52,7 +52,35 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	overflow-x: hidden; 	/* Scroll Horizontale , Pour masquer le débordement horizontal du contenu */
+	margin-top: 100px; 		/* Pour ne pas coller au haut avec mode_edition */
 }
+
+/* mode edition - en haut de la page */
+.mode_edition{	
+	background: black;
+    color: white;
+    align-items: center;
+    height: 59px;
+    width: 100%;
+    display: flex;
+	justify-content: center;
+	position: absolute; 	/* Retire l'élément du flux normal pour le positionner en haut de la page sans perturber le reste du contenu */
+	top: 0; 				/* Pour le positionner en haut de la page */
+	left: 0; 				/* positionner à gauche de la page */
+	}
+
+/* mode edition - icone */
+.mode_edition .fa-regular , .fa-pen-to-square {
+	color: white;
+	font-size: 16px;
+	height: 30px;
+	display: flex;
+    align-items: center;
+	margin-left: 10px;
+}
+
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -178,6 +206,35 @@ a:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+/* modifier mes projets - aligner horizontalement */
+.portfolio_title {
+	display: flex;
+	justify-content: center;
+}
+
+/* modifier - lien */
+.edit{
+	color: black;
+	font-size: 16px;
+	height: 30px;
+	text-decoration: none;
+	margin-left: 10px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
+/* modifier - icone */
+.portfolio_title .fa-regular , .fa-pen-to-square {
+	color: black;
+	font-size: 16px;
+	height: 30px;
+	margin-left: 40px;
+	display: flex;
+    align-items: center;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -195,12 +252,6 @@ a:hover {
 .gallery figcaption {
 	margin-top: 10px;
 }
-
-/* .gallery_pic{
-	width: 305px;
-	height: 407px;
-} */
-
 
 
 /****** Partie Contact */
@@ -227,6 +278,7 @@ margin: auto;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	cursor: pointer; /* curseur de la souris en forme de main qui sera affiché au survol */
 }
 #contact label {
 	margin: 2em 0 1em 0;

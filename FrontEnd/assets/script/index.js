@@ -173,16 +173,83 @@ function filterByCatg(categorieSelectionne) {
 
 
 
+
+
+//------Se déconnecter
+function logout() {
+  // Suppression du token
+  localStorage.removeItem('token');
+}
+
+
+
+
+//------Mode admin 
+function isAdmin() {
+  // si login est connecter
+  if (localStorage.getItem('token')) {
+
+    //récup lien login qui se trouve dans nav ul li 
+    const loginLink = document.querySelector('nav ul li:nth-child(3) a')
+
+    //Modifier txt login -> logout
+    loginLink.textContent = 'logout'
+
+    //clique sur logout pour se deconnecter
+    loginLink.addEventListener('click', function () {
+      logout()
+    })
+
+
+    //modifier mes projets
+    const mesProjets = document.querySelector('.portfolio_title');     //conteneur où lien et icone seront ajoutés
+    
+    const modifierIcon = document.createElement('i');                  //ajout de l'icone modifier mes projets
+    modifierIcon.classList.add('fa-regular', 'fa-pen-to-square');      
+    
+    const modifier = document.createElement('a');                      //ajout lien pour modifier
+    modifier.textContent = 'modifier';
+    modifier.href = '#';
+    modifier.classList.add('edit');
+
+    mesProjets.appendChild(modifierIcon);                              //mettre i et a dans le conteneur portfolio_title
+    mesProjets.appendChild(modifier);
+    
+
+    //mode edition
+    const body = document.querySelector('body');                       //recup body pour ajouter div 
+    
+    const modeEdition = document.createElement('div');                 //creation div
+    modeEdition.classList.add('mode_edition');
+        
+    const modeEditionIcon = document.createElement('i');               //ajout icone mode edition
+    modeEditionIcon.classList.add('fa-regular', 'fa-pen-to-square');
+    
+    modeEdition.textContent = 'Mode édition';                          //ajout txt
+    
+    modeEdition.appendChild(modeEditionIcon);                          //ajout i dans la div
+    body.insertBefore(modeEdition, body.firstChild);                   //ajout div dans le body
+    
+    }
+      else {
+        console.log("pas connecté")
+      }
+}
+
+
+
+
+
 //-----Fonction initialisation
 async function init() {
-    await getWorks();
-    await getCategories();
-    createButtonCatg();
-    showAllWorks();
-}
-  // appel pour l'initialisation
-  init(); 
-  
-  
-  
-  
+  await getWorks()
+  await getCategories()
+  createButtonCatg()
+  showAllWorks()
+  isAdmin()
+  }
+// appel pour l'initialisation
+init(); 
+
+
+
