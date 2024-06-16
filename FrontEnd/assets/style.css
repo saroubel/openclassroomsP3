@@ -181,6 +181,24 @@ a:hover {
 	margin-bottom: 1em;
 }
 
+/* modifier mes projets - aligner horizontalement */
+.portfolio_title {
+	display: flex;
+	justify-content: center;
+}
+
+/* modifier - lien */
+.edit{
+	color: black;
+	font-size: 16px;
+	height: 30px;
+	text-decoration: none;
+	margin-left: 10px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
