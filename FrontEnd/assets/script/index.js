@@ -184,6 +184,26 @@ function logout() {
 
 
 
+//------Mode admin 
+function isAdmin() {
+  // si login est connecter
+  if (localStorage.getItem('token')) {
+
+    //récup lien login qui se trouve dans nav ul li 
+    const loginLink = document.querySelector('nav ul li:nth-child(3) a')
+
+    //Modifier txt login -> logout
+    loginLink.textContent = 'logout'
+
+    //clique sur logout pour se deconnecter
+    loginLink.addEventListener('click', function () {
+      logout()
+    })
+  }
+}
+
+
+
 
 
 //-----Fonction initialisation
@@ -192,6 +212,7 @@ async function init() {
   await getCategories()
   createButtonCatg()
   showAllWorks()
+  isAdmin()
   }
 // appel pour l'initialisation
 init(); 
