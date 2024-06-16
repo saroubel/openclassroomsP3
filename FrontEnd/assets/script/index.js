@@ -173,13 +173,26 @@ function filterByCatg(categorieSelectionne) {
 
 
 
+
+
+//------Se déconnecter
+function logout() {
+  // Suppression du token
+  localStorage.removeItem('token');
+}
+
+
+
+
+
+
 //-----Fonction initialisation
 async function init() {
   await getWorks()
   await getCategories()
   createButtonCatg()
   showAllWorks()
-}
+  }
 // appel pour l'initialisation
 init(); 
 
