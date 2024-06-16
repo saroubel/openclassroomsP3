@@ -15,6 +15,7 @@ async function getWorks() {                                 // exécute des opé
 }
 
 
+
 //-----Récupération les données Catégories 
 let categories = []
 async function getCategories() {
@@ -224,10 +225,15 @@ function isAdmin() {
         
     const modeEditionIcon = document.createElement('i');               //ajout icone mode edition
     modeEditionIcon.classList.add('fa-regular', 'fa-pen-to-square');
-    
-    modeEdition.textContent = 'Mode édition';                          //ajout txt
-    
-    modeEdition.appendChild(modeEditionIcon);                          //ajout i dans la div
+       
+    const modeEditionTxt = document.createElement('a');                //ajout txt mode edition
+    modeEditionTxt.textContent = 'Mode édition';
+    modeEditionTxt.href = '#';
+    modeEditionTxt.classList.add('txt_edition');
+
+
+    modeEdition.appendChild(modeEditionIcon);                          //ajout txt et i dans la div
+    modeEdition.appendChild(modeEditionTxt);                     
     body.insertBefore(modeEdition, body.firstChild);                   //ajout div dans le body
     
     }
