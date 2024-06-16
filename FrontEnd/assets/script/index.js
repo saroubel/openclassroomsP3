@@ -215,7 +215,25 @@ function isAdmin() {
     mesProjets.appendChild(modifierIcon);                              //mettre i et a dans le conteneur portfolio_title
     mesProjets.appendChild(modifier);
     
-  }
+
+    //mode edition
+    const body = document.querySelector('body');                       //recup body pour ajouter div 
+    
+    const modeEdition = document.createElement('div');                 //creation div
+    modeEdition.classList.add('mode_edition');
+        
+    const modeEditionIcon = document.createElement('i');               //ajout icone mode edition
+    modeEditionIcon.classList.add('fa-regular', 'fa-pen-to-square');
+    
+    modeEdition.textContent = 'Mode édition';                          //ajout txt
+    
+    modeEdition.appendChild(modeEditionIcon);                          //ajout i dans la div
+    body.insertBefore(modeEdition, body.firstChild);                   //ajout div dans le body
+    
+    }
+      else {
+        console.log("pas connecté")
+      }
 }
 
 
