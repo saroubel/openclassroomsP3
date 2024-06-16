@@ -199,6 +199,22 @@ function isAdmin() {
     loginLink.addEventListener('click', function () {
       logout()
     })
+
+
+    //modifier mes projets
+    const mesProjets = document.querySelector('.portfolio_title');     //conteneur où lien et icone seront ajoutés
+    
+    const modifierIcon = document.createElement('i');                  //ajout de l'icone modifier mes projets
+    modifierIcon.classList.add('fa-regular', 'fa-pen-to-square');      
+    
+    const modifier = document.createElement('a');                      //ajout lien pour modifier
+    modifier.textContent = 'modifier';
+    modifier.href = '#';
+    modifier.classList.add('edit');
+
+    mesProjets.appendChild(modifierIcon);                              //mettre i et a dans le conteneur portfolio_title
+    mesProjets.appendChild(modifier);
+    
   }
 }
 
