@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+	line-height: 1; 
 }
 ol, ul {
 	list-style: none;
@@ -53,6 +53,8 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -178,6 +180,7 @@ a:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -195,12 +198,6 @@ a:hover {
 .gallery figcaption {
 	margin-top: 10px;
 }
-
-/* .gallery_pic{
-	width: 305px;
-	height: 407px;
-} */
-
 
 
 /****** Partie Contact */
@@ -227,6 +224,7 @@ margin: auto;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	cursor: pointer; /* curseur de la souris en forme de main qui sera affiché au survol */
 }
 #contact label {
 	margin: 2em 0 1em 0;

@@ -175,14 +175,13 @@ function filterByCatg(categorieSelectionne) {
 
 //-----Fonction initialisation
 async function init() {
-    await getWorks();
-    await getCategories();
-    createButtonCatg();
-    showAllWorks();
+  await getWorks()
+  await getCategories()
+  createButtonCatg()
+  showAllWorks()
 }
-  // appel pour l'initialisation
-  init(); 
-  
-  
-  
-  
+// appel pour l'initialisation
+init(); 
+
+
+
