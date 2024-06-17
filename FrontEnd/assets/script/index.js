@@ -15,6 +15,7 @@ async function getWorks() {                                 // exécute des opé
 }
 
 
+
 //-----Récupération les données Catégories 
 let categories = []
 async function getCategories() {
@@ -34,30 +35,38 @@ async function getCategories() {
 //-----Création des bouttons Catégories dynamiquement 
 function createButtonCatg(){
 
-    //recup le conteneur html avec la classe filters où les btn de catégories seront ajoutés
+    // recup le conteneur html avec la classe filters où les btn de catégories seront ajoutés
     const filters = document.querySelector('.filters')
   
     // btn tous 
-    const btnTous = document.createElement("button")  // button : balise
+    const btnTous = document.createElement("button")  
     // ajout des attributs
     btnTous.textContent = "Tous"
     btnTous.setAttribute("name", "Tous")
     btnTous.setAttribute("type", "button")
     // ajout class au btn
     btnTous.classList.add("filters_btn")  
+    // Ajout class 'toggled' au btn 'Tous' pour qu'il sera affiché par défaut aprés l'actualisation de la page
+    btnTous.classList.add("toggled")
 
-    //----------//
-    // click et fonction filterByCatg pour btn Tous
+    //
+    //--click et filterByCatg pour btn Tous
     btnTous.addEventListener('click', function () { 
-      filterByCatg("Tous") 
-      btnTous.classList.toggle('toggled')  // add classe toggled pour changer style btn Tous lors du click
-     
-     }
-    )
+      //appel fonction qu'on va la créer qui filtre les works
+      filterByCatg("Tous")
 
-    // ajout du btn dans le conteneur filters
+          // Supprimer classe 'toggled'de tous les boutons pour ne garder que le btn 'Tous'
+          const allButtons = document.querySelectorAll('.filters_btn');
+          allButtons.forEach(btn => btn.classList.remove('toggled'));
+          // Ajouter classe 'toggled' au bouton cliqué
+          btnTous.classList.add('toggled');
+     
+    })
+
+    // ajout btn tous dans le conteneur filters
     filters.appendChild(btnTous)
     
+
 
     // btns categories
     // ajouter les btn pour chaque catégorie
@@ -72,20 +81,22 @@ function createButtonCatg(){
       btnCategorie.classList.add("filters_btn")
       // btnCategorie.classList += "filters_btn"
 
-      //ajout le txt des noms dans les btn depuis le tab de catégories
+      //ajouter les noms pour les btn depuis le tab de catégories
       btnCategorie.textContent=categories[i].name
-
-      //----------//
-      //click et fonction filterByCatg pour chaque catégorie
+      //
+      //-- click et filterByCatg pour chaque catégorie
       btnCategorie.addEventListener('click', function () {
-
         filterByCatg(categories[i].name)
-        btnCategorie.classList.toggle('toggled');
-        }
-      )
-  
+
+          // Supprimer classe 'toggled' de tous les boutons pour garder le btn cliqué
+          const allButtons = document.querySelectorAll('.filters_btn');
+          allButtons.forEach(btn => btn.classList.remove('toggled'));
+          // Ajouter classe 'toggled' au bouton cliqué
+          btnCategorie.classList.add('toggled');
+      })
+
       //ajout du btn dans le conteneur filters
-      filters.appendChild(btnCategorie)
+      filters.appendChild(btnCategorie)   
     }
   }
   
@@ -224,10 +235,15 @@ function isAdmin() {
         
     const modeEditionIcon = document.createElement('i');               //ajout icone mode edition
     modeEditionIcon.classList.add('fa-regular', 'fa-pen-to-square');
-    
-    modeEdition.textContent = 'Mode édition';                          //ajout txt
-    
-    modeEdition.appendChild(modeEditionIcon);                          //ajout i dans la div
+       
+    const modeEditionTxt = document.createElement('a');                //ajout txt mode edition
+    modeEditionTxt.textContent = 'Mode édition';
+    modeEditionTxt.href = '#';
+    modeEditionTxt.classList.add('txt_edition');
+
+
+    modeEdition.appendChild(modeEditionIcon);                          //ajout txt et i dans la div
+    modeEdition.appendChild(modeEditionTxt);                     
     body.insertBefore(modeEdition, body.firstChild);                   //ajout div dans le body
     
     }

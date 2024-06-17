@@ -1,3 +1,4 @@
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -78,6 +79,18 @@ body {
 	display: flex;
     align-items: center;
 	margin-left: 10px;
+}
+
+/* mode edition - lien */
+.txt_edition {
+	color: white;
+	font-size: 16px;
+	height: 30px;
+	text-decoration: none;
+	margin-left: 10px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
 }
 
 
@@ -200,6 +213,12 @@ a:hover {
 	background-color: #1D6154;
 	color: white;
 }
+
+/* bouton cliqué actif */
+.filters_btn.toggled {
+	background-color: #1D6154; 
+	color: white;
+  }
 
 /****** Portfolio Partie Galerie */
 #portfolio h2 {
