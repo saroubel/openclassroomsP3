@@ -72,15 +72,19 @@ function login() {
                 window.location.href = "index.html#portfolio"       // redirection vers index projets 
 
             } else {
-                // Afficher un message d'erreur
-                const errorDisplay = document.createElement('div'); 
-                errorDisplay.classList.add('error-msg');            // Ajout classe 'error-message'
-                errorDisplay.textContent = "Please check your email and password";
-                form.appendChild(errorDisplay); 
+                    // Vérifier si le message d'erreur existe déjà
+                    const existingErrorMsg = form.querySelector('.error-msg');
+                    if (!existingErrorMsg) {
+                        // Créer un nouveau message d'erreur si aucun n'existe
+                        const errorMsg = document.createElement('div'); 
+                        errorMsg.classList.add('error-msg');            // Ajout classe 'error-message'
+                        errorMsg.textContent = "Please check your email and password";
+                        form.appendChild(errorMsg); 
                 
-                //css pour le message d'erreur
-                errorDisplay.style.cssText = 'color: red; font-size: 16px; align-self: center; margin-bottom: 10px;';
-            }
+                        //css pour le message d'erreur
+                        errorMsg.style.cssText = 'color: red; font-size: 16px; align-self: center; margin-bottom: 10px;';
+                    }
+                }
         })
     })
 }

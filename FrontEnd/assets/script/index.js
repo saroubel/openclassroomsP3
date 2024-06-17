@@ -83,8 +83,9 @@ function createButtonCatg(){
 
       //ajouter les noms pour les btn depuis le tab de catégories
       btnCategorie.textContent=categories[i].name
+      
       //
-      //-- click et filterByCatg pour chaque catégorie
+      //--click et filterByCatg pour chaque catégorie
       btnCategorie.addEventListener('click', function () {
         filterByCatg(categories[i].name)
 
@@ -269,3 +270,14 @@ init();
 
 
 
+//creation une fenêtre modale pour midifier mes projets
+function openModal() {
+
+  const modal = document.getElementById("modal");
+  // modal.style.display = "block";
+
+  const body = document.querySelector('body');
+  const modeEdition = document.createElement('div');
+  modeEdition.classList.add('mode_edition');
+
+}
