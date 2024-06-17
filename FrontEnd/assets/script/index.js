@@ -46,6 +46,9 @@ function createButtonCatg(){
     btnTous.setAttribute("type", "button")
     // ajout class au btn
     btnTous.classList.add("filters_btn")  
+    // Ajout class 'toggled' au btn 'Tous' pour qu'il sera affiché par défaut aprés l'actualisation de la page
+    btnTous.classList.add("toggled")
+
     //
     //--click et filterByCatg pour btn Tous
     btnTous.addEventListener('click', function () { 
