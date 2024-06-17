@@ -72,12 +72,12 @@ function login() {
                 window.location.href = "index.html#portfolio"       // redirection vers index projets 
 
             } else {
-                // alert("Please check your email and password ")    
                 // Afficher un message d'erreur
                 const errorDisplay = document.createElement('div'); 
-                errorDisplay.classList.add('error-msg');        // Ajout classe 'error-message'
+                errorDisplay.classList.add('error-msg');            // Ajout classe 'error-message'
                 errorDisplay.textContent = "Please check your email and password";
                 form.appendChild(errorDisplay); 
+                
                 //css pour le message d'erreur
                 errorDisplay.style.cssText = 'color: red; font-size: 16px; align-self: center; margin-bottom: 10px;';
             }
