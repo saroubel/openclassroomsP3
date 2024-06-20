@@ -303,7 +303,7 @@ function createModal() {
       btnAdd.classList.add('btn_add')
       modalContent.appendChild(btnAdd)
 
-      //images dans le conteneu - appel fonction
+      //images dans le conteneur - appel fonction
       addImgModal(galleryModal)
 
 
@@ -337,7 +337,7 @@ function addImgModal(galleryModal) {
     imgModal.src = listWorks[i].imageUrl            // imgModal.setAttribute('src', listWorks[i].imageUrl)
     imgModal.alt = listWorks[i].title
     imgModal.classList.add('img_modal')
-    
+
     galleryModal.appendChild(imgModal) 
   }
 }

@@ -382,6 +382,13 @@ footer nav ul {
     padding-bottom: 40px;
 }
 
+.img_modal {
+	width: 76px;
+	height: 102px;
+	margin: 5px;
+}
+
+
 .btn_add {
 	display: flex;
 	justify-content: center;
@@ -397,6 +404,8 @@ footer nav ul {
 	border-radius: 60px;
 	cursor: pointer;
 }
+
+
 
 
 
