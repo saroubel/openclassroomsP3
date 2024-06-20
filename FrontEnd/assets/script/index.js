@@ -302,7 +302,10 @@ function createModal() {
       btnAdd.textContent = 'Ajouter une photo'
       btnAdd.classList.add('btn_add')
       modalContent.appendChild(btnAdd)
-      
+
+      //images dans le conteneu - appel fonction
+      addImgModal(galleryModal)
+
 
       //appel fonction ouverture
       openModal(modal)
@@ -324,6 +327,23 @@ function createModal() {
 
 
 
+//ajouter les img au conteneur galleryModal
+function addImgModal(galleryModal) {
+  //ajouter img
+  for (let i = 0; i < listWorks.length; i++) {
+
+    const imgModal = document.createElement('img')
+
+    imgModal.src = listWorks[i].imageUrl            // imgModal.setAttribute('src', listWorks[i].imageUrl)
+    imgModal.alt = listWorks[i].title
+    imgModal.classList.add('img_modal')
+    
+    galleryModal.appendChild(imgModal) 
+  }
+}
+
+
+
 //Ouverture de la modale
 function openModal(modal) {
   modal.style.display = 'block'
@@ -334,9 +354,6 @@ function openModal(modal) {
 function closeModal(modal) {
     modal.style.display = 'none'
 }
-
-
-
 
 
 //****************************************************************/
