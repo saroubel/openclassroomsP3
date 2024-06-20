@@ -287,6 +287,11 @@ function createModal() {
       btnClose.classList.add('fa-solid', 'fa-xmark')
       modalContent.appendChild(btnClose)
 
+      //titre modal
+      const modalTitle = document.createElement('h3')
+      modalTitle.textContent = 'Galerie photo'
+      modalContent.appendChild(modalTitle)
+
       //appel fonction ouverture
       openModal(modal)
       //clique fermeture sur icone close
