@@ -292,6 +292,12 @@ function createModal() {
       modalTitle.textContent = 'Galerie photo'
       modalContent.appendChild(modalTitle)
 
+       //conteneur gallery 
+       const galleryModal = document.createElement('div')
+       galleryModal.classList.add('gallery_modal')
+       modalContent.appendChild(galleryModal)
+      
+
       //appel fonction ouverture
       openModal(modal)
       //clique fermeture sur icone close

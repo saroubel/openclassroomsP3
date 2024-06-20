@@ -371,6 +371,16 @@ footer nav ul {
 	color: black;
 	font-family: work sans;
 }
+/* conteneur gallery */
+.gallery_modal {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+	text-align: center;
+	margin: 40px;
+    border-bottom: 1px solid #B3B3B3;
+    padding-bottom: 40px;
+}
 
 
 
