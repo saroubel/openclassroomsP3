@@ -286,9 +286,33 @@ function createModal() {
       const btnClose = document.createElement('i')
       btnClose.classList.add('fa-solid', 'fa-xmark')
       modalContent.appendChild(btnClose)
+
+      //appel fonction ouverture
+      openModal(modal)
+      //clique fermeture sur icone close
+      btnClose.addEventListener('click', function() {
+        closeModal(modal)
+      })
+
+
     })
   }
 }
+
+
+
+//Ouverture de la modale
+function openModal(modal) {
+  modal.style.display = 'block'
+}
+
+
+//Fermeture de la modale
+function closeModal(modal) {
+    modal.style.display = 'none'
+}
+
+
 
 
 
