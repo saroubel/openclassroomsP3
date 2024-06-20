@@ -186,6 +186,8 @@ function filterByCatg(categorieSelectionne) {
 
 
 
+//***************************************************************/
+
 
 //------Se déconnecter
 function logout() {
@@ -257,6 +259,32 @@ function isAdmin() {
 
 
 
+//*****************************************************************/
+
+//creation Modale pour modifier mes projets
+function createModal() {
+
+  //si login est connecté
+  if (localStorage.getItem('token')) {
+  //recup btn modifier
+  const modifier = document.querySelector('.edit')
+  //clique sur btn modifier ouvert la modale
+  modifier.addEventListener('click', function () {
+
+      //créer modal
+      const modal = document.createElement('aside')
+      modal.classList.add('modal')
+      //insert modal apres btn modifier pour eviter recreation de la modale
+      modifier.insertAdjacentElement('afterend', modal);
+
+    })
+  }
+}
+
+
+
+//****************************************************************/
+
 //-----Fonction initialisation
 async function init() {
   await getWorks()
@@ -264,20 +292,7 @@ async function init() {
   createButtonCatg()
   showAllWorks()
   isAdmin()
-  }
+  createModal() 
+}
 // appel pour l'initialisation
 init(); 
-
-
-
-//creation une fenêtre modale pour midifier mes projets
-function openModal() {
-
-  const modal = document.getElementById("modal");
-  // modal.style.display = "block";
-
-  const body = document.querySelector('body');
-  const modeEdition = document.createElement('div');
-  modeEdition.classList.add('mode_edition');
-
-}
