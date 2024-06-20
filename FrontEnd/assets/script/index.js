@@ -292,10 +292,16 @@ function createModal() {
       modalTitle.textContent = 'Galerie photo'
       modalContent.appendChild(modalTitle)
 
-       //conteneur gallery 
+      //conteneur gallery 
        const galleryModal = document.createElement('div')
        galleryModal.classList.add('gallery_modal')
        modalContent.appendChild(galleryModal)
+
+      //boutton Ajouter une photo
+      const btnAdd = document.createElement('button')
+      btnAdd.textContent = 'Ajouter une photo'
+      btnAdd.classList.add('btn_add')
+      modalContent.appendChild(btnAdd)
       
 
       //appel fonction ouverture
