@@ -277,6 +277,15 @@ function createModal() {
       //insert modal apres btn modifier pour eviter recreation de la modale
       modifier.insertAdjacentElement('afterend', modal);
 
+      //créer le contenu de la modale
+      const modalContent = document.createElement('div')
+      modalContent.classList.add('modal_content')
+      modal.appendChild(modalContent);
+
+      //icone close 
+      const btnClose = document.createElement('i')
+      btnClose.classList.add('fa-solid', 'fa-xmark')
+      modalContent.appendChild(btnClose)
     })
   }
 }
