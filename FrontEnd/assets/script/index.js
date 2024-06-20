@@ -293,6 +293,12 @@ function createModal() {
       btnClose.addEventListener('click', function() {
         closeModal(modal)
       })
+      //clique fermeture en dehors de la modale
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          closeModal(modal)
+        }
+      }
 
 
     })
