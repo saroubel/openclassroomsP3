@@ -371,7 +371,9 @@ footer nav ul {
 	color: black;
 	font-family: work sans;
 }
-/* conteneur gallery */
+
+
+/* conteneur gallery modal */
 .gallery_modal {
 	display: flex;
     flex-wrap: wrap;
@@ -382,12 +384,38 @@ footer nav ul {
     padding-bottom: 40px;
 }
 
+
 .img_modal {
-	width: 76px;
-	height: 102px;
 	margin: 5px;
+	width: 100%;
 }
 
+.img_modal_box {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+	width: 76px;
+	height: 102px;
+
+}
+
+.img_modal_box i {
+	
+	position: absolute; /* Retire l'élément du flux normal pour le positionner en haut de la page sans perturber le reste du contenu */
+	top: 10px;
+    right: 0px;
+	background-color: black;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 9px;
+	color: white;
+	cursor: pointer;
+}
+
+.img_modal_box i:hover {
+	color: red;
+	background-color: white;
+}
 
 .btn_add {
 	display: flex;
@@ -404,6 +432,9 @@ footer nav ul {
 	border-radius: 60px;
 	cursor: pointer;
 }
+
+
+
 
 
 

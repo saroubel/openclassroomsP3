@@ -271,6 +271,7 @@ function createModal() {
   //clique sur btn modifier ouvert la modale
   modifier.addEventListener('click', function () {
 
+
       //créer modal
       const modal = document.createElement('aside')
       modal.classList.add('modal')
@@ -282,33 +283,34 @@ function createModal() {
       modalContent.classList.add('modal_content')
       modal.appendChild(modalContent);
 
-      //icone close 
+      //créer icone close 
       const btnClose = document.createElement('i')
       btnClose.classList.add('fa-solid', 'fa-xmark')
       modalContent.appendChild(btnClose)
 
-      //titre modal
+      //créer titre modal
       const modalTitle = document.createElement('h3')
       modalTitle.textContent = 'Galerie photo'
       modalContent.appendChild(modalTitle)
 
-      //conteneur gallery 
+      //créer conteneur gallery 
        const galleryModal = document.createElement('div')
        galleryModal.classList.add('gallery_modal')
        modalContent.appendChild(galleryModal)
 
-      //boutton Ajouter une photo
+      //appel fonction - add images dans le conteneur gallery
+      addImgModal(galleryModal)
+
+      //créer boutton Ajouter une photo
       const btnAdd = document.createElement('button')
       btnAdd.textContent = 'Ajouter une photo'
       btnAdd.classList.add('btn_add')
       modalContent.appendChild(btnAdd)
 
-      //images dans le conteneur - appel fonction
-      addImgModal(galleryModal)
-
 
       //appel fonction ouverture
       openModal(modal)
+      
       //clique fermeture sur icone close
       btnClose.addEventListener('click', function() {
         closeModal(modal)
@@ -326,24 +328,6 @@ function createModal() {
 }
 
 
-
-//ajouter les img au conteneur galleryModal
-function addImgModal(galleryModal) {
-  //ajouter img
-  for (let i = 0; i < listWorks.length; i++) {
-
-    const imgModal = document.createElement('img')
-
-    imgModal.src = listWorks[i].imageUrl            // imgModal.setAttribute('src', listWorks[i].imageUrl)
-    imgModal.alt = listWorks[i].title
-    imgModal.classList.add('img_modal')
-
-    galleryModal.appendChild(imgModal) 
-  }
-}
-
-
-
 //Ouverture de la modale
 function openModal(modal) {
   modal.style.display = 'block'
@@ -355,6 +339,33 @@ function closeModal(modal) {
     modal.style.display = 'none'
 }
 
+
+
+//Créer les img au conteneur galleryModal avec les icônes supression
+function addImgModal(galleryModal) {
+
+    for (let i = 0; i < listWorks.length; i++) {
+
+      //créer conteneur box pour img et icon
+      const imgModalBox = document.createElement('div');
+      imgModalBox.classList.add('img_modal_box');
+      //créer img
+        const imgModal = document.createElement('img')
+        imgModal.src = listWorks[i].imageUrl // imgModal.setAttribute('src', listWorks[i].imageUrl)
+        imgModal.alt = listWorks[i].title
+        imgModal.classList.add('img_modal')
+      //créer icône supression sur img
+        const deleteIcon = document.createElement('i')
+        deleteIcon.setAttribute('id', listWorks[i].id)
+        deleteIcon.classList.add('fa-solid', 'fa-trash-can')  
+
+        imgModalBox.appendChild(imgModal)
+        imgModalBox.appendChild(deleteIcon)    
+        
+      //ajouter conteneur box à gallery de modale
+        galleryModal.appendChild(imgModalBox);
+   }
+}
 
 //****************************************************************/
 
