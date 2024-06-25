@@ -325,5 +325,121 @@ footer nav ul {
 }
 
 
+/***** Modale *****/
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.modal_content {
+	background-color: white;
+	margin: 10% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	max-width: 34%; /*dimmention temporaire*/
+	height: 85%;    /*dimmention temporaire*/
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+.modal_content i {
+	display: flex;
+	align-self: flex-end;
+	font-size: 24px;
+	cursor: pointer;
+}
+
+
+.modal_content h3 {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	font-size: 26px;
+	margin: 20px;
+	color: black;
+	font-family: work sans;
+}
+
+
+/* conteneur gallery modal */
+.gallery_modal {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+	text-align: center;
+	margin: 40px;
+    border-bottom: 1px solid #B3B3B3;
+    padding-bottom: 40px;
+}
+
+
+.img_modal {
+	margin: 5px;
+	width: 100%;
+}
+
+.img_modal_box {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+	width: 76px;
+	height: 102px;
+
+}
+
+.img_modal_box i {
+	
+	position: absolute; /* Retire l'élément du flux normal pour le positionner en haut de la page sans perturber le reste du contenu */
+	top: 10px;
+    right: 0px;
+	background-color: black;
+	border-radius: 3px;
+	padding: 5px;
+	font-size: 9px;
+	color: white;
+	cursor: pointer;
+}
+
+.img_modal_box i:hover {
+	color: red;
+	background-color: white;
+}
+
+.btn_add {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: syne;
+	font-size: 14px;
+	font-weight: 700;
+	color: white;
+	height: 36px;
+	width: 237px;
+	background-color: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
 
 

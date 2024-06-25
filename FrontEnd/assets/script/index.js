@@ -83,8 +83,9 @@ function createButtonCatg(){
 
       //ajouter les noms pour les btn depuis le tab de catégories
       btnCategorie.textContent=categories[i].name
+      
       //
-      //-- click et filterByCatg pour chaque catégorie
+      //--click et filterByCatg pour chaque catégorie
       btnCategorie.addEventListener('click', function () {
         filterByCatg(categories[i].name)
 
@@ -185,6 +186,8 @@ function filterByCatg(categorieSelectionne) {
 
 
 
+//***************************************************************/
+
 
 //------Se déconnecter
 function logout() {
@@ -256,6 +259,116 @@ function isAdmin() {
 
 
 
+//*****************************************************************/
+
+//creation Modale pour modifier mes projets
+function createModal() {
+
+  //si login est connecté
+  if (localStorage.getItem('token')) {
+  //recup btn modifier
+  const modifier = document.querySelector('.edit')
+  //clique sur btn modifier ouvert la modale
+  modifier.addEventListener('click', function () {
+
+
+      //créer modal
+      const modal = document.createElement('aside')
+      modal.classList.add('modal')
+      //insert modal apres btn modifier pour eviter recreation de la modale
+      modifier.insertAdjacentElement('afterend', modal);
+
+      //créer le contenu de la modale
+      const modalContent = document.createElement('div')
+      modalContent.classList.add('modal_content')
+      modal.appendChild(modalContent);
+
+      //créer icone close 
+      const btnClose = document.createElement('i')
+      btnClose.classList.add('fa-solid', 'fa-xmark')
+      modalContent.appendChild(btnClose)
+
+      //créer titre modal
+      const modalTitle = document.createElement('h3')
+      modalTitle.textContent = 'Galerie photo'
+      modalContent.appendChild(modalTitle)
+
+      //créer conteneur gallery 
+       const galleryModal = document.createElement('div')
+       galleryModal.classList.add('gallery_modal')
+       modalContent.appendChild(galleryModal)
+
+      //appel fonction - add images dans le conteneur gallery
+      addImgModal(galleryModal)
+
+      //créer boutton Ajouter une photo
+      const btnAdd = document.createElement('button')
+      btnAdd.textContent = 'Ajouter une photo'
+      btnAdd.classList.add('btn_add')
+      modalContent.appendChild(btnAdd)
+
+
+      //appel fonction ouverture
+      openModal(modal)
+      
+      //clique fermeture sur icone close
+      btnClose.addEventListener('click', function() {
+        closeModal(modal)
+      })
+      //clique fermeture en dehors de la modale
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          closeModal(modal)
+        }
+      }
+
+
+    })
+  }
+}
+
+
+//Ouverture de la modale
+function openModal(modal) {
+  modal.style.display = 'block'
+}
+
+
+//Fermeture de la modale
+function closeModal(modal) {
+    modal.style.display = 'none'
+}
+
+
+
+//Créer les img au conteneur galleryModal avec les icônes supression
+function addImgModal(galleryModal) {
+
+    for (let i = 0; i < listWorks.length; i++) {
+
+      //créer conteneur box pour img et icon
+      const imgModalBox = document.createElement('div');
+      imgModalBox.classList.add('img_modal_box');
+      //créer img
+        const imgModal = document.createElement('img')
+        imgModal.src = listWorks[i].imageUrl // imgModal.setAttribute('src', listWorks[i].imageUrl)
+        imgModal.alt = listWorks[i].title
+        imgModal.classList.add('img_modal')
+      //créer icône supression sur img
+        const deleteIcon = document.createElement('i')
+        deleteIcon.setAttribute('id', listWorks[i].id)
+        deleteIcon.classList.add('fa-solid', 'fa-trash-can')  
+
+        imgModalBox.appendChild(imgModal)
+        imgModalBox.appendChild(deleteIcon)    
+        
+      //ajouter conteneur box à gallery de modale
+        galleryModal.appendChild(imgModalBox);
+   }
+}
+
+//****************************************************************/
+
 //-----Fonction initialisation
 async function init() {
   await getWorks()
@@ -263,9 +376,7 @@ async function init() {
   createButtonCatg()
   showAllWorks()
   isAdmin()
-  }
+  createModal() 
+}
 // appel pour l'initialisation
 init(); 
-
-
-
