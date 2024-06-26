@@ -300,8 +300,8 @@ function createModal() {
 
       //appel fonction - add images dans le conteneur gallery
       addImgModal(galleryModal)
-      
-      //appel fonction supression
+
+      //appel fonction event click de la suppression
       deleteIconEvent()
 
       //créer boutton Ajouter une photo
@@ -397,6 +397,9 @@ function deleteIconEvent() {
   //event click 
   deleteIcon.forEach(deleteIcon => {
     deleteIcon.addEventListener('click', function() {
+      if (confirm('Are you sure you want to delete this work ?')) {
+        deleteWork(deleteIcon.id);
+      }
       //appel fonction supression
       deleteWork(deleteIcon.id)
       // refresh page
