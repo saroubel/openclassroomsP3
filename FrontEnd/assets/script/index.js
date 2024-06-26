@@ -1,6 +1,6 @@
 //---Récupération les données depuis l'API---//
 
-//-----Récupération les données Works 
+//*** Récupération les données Works 
 let listWorks = []                                          // variable initialisée à un tab vide pour stocker les données                              
 async function getWorks() {                                 // exécute des opérations bloquantes en arrière-plan sans bloquer le thread d'exécution principal
     await fetch('http://localhost:5678/api/works')          // appel de l'API
@@ -16,7 +16,7 @@ async function getWorks() {                                 // exécute des opé
 
 
 
-//-----Récupération les données Catégories 
+//*** Récupération les données Catégories 
 let categories = []
 async function getCategories() {
     await fetch('http://localhost:5678/api/categories')     // appel de l'API
@@ -27,12 +27,12 @@ async function getCategories() {
             // afficher les catégories
             // console.log(categories);                     
           } )
-};
+}
 
 
 
 
-//-----Création des bouttons Catégories dynamiquement 
+//*** Création des bouttons Catégories dynamiquement 
 function createButtonCatg(){
 
     // recup le conteneur html avec la classe filters où les btn de catégories seront ajoutés
@@ -49,8 +49,7 @@ function createButtonCatg(){
     // Ajout class 'toggled' au btn 'Tous' pour qu'il sera affiché par défaut aprés l'actualisation de la page
     btnTous.classList.add("toggled")
 
-    //
-    //--click et filterByCatg pour btn Tous
+    //** click et filterByCatg pour btn Tous
     btnTous.addEventListener('click', function () { 
       //appel fonction qu'on va la créer qui filtre les works
       filterByCatg("Tous")
@@ -84,8 +83,7 @@ function createButtonCatg(){
       //ajouter les noms pour les btn depuis le tab de catégories
       btnCategorie.textContent=categories[i].name
       
-      //
-      //--click et filterByCatg pour chaque catégorie
+      //** click et filterByCatg pour chaque catégorie
       btnCategorie.addEventListener('click', function () {
         filterByCatg(categories[i].name)
 
@@ -106,7 +104,7 @@ function createButtonCatg(){
 
   
 
-//-------Manipulation du DOM en JS -- Création d'une figure où les img et titres seront ajoutés
+//*** Manipulation du DOM en JS -- Création d'une figure où les img et titres seront ajoutés
   function creationFigureGallery(work,gallery) {
       
   let figureGallery = document.createElement("figure")
@@ -131,7 +129,7 @@ function createButtonCatg(){
 
 
 
-//-----Afficher Gallery de tout les works dynamiquement avec photo et titre--Manipulation du DOM en JS
+//*** Afficher Gallery de tout les works dynamiquement avec photo et titre--Manipulation du DOM en JS
 function showAllWorks(){  
 
   //recup le conteneur html avec la classe gallery où les works seront ajoutés
@@ -150,7 +148,7 @@ function showAllWorks(){
 
 
 
-//-----Filtrage de gallery par catégories pendant click
+//*** Filtrage de gallery par catégories pendant click
 function filterByCatg(categorieSelectionne) {
 
   // console.log("ce que j'ai cliqué : " + categorieSelectionne)
@@ -186,19 +184,16 @@ function filterByCatg(categorieSelectionne) {
 
 
 
-//***************************************************************/
+//********************************//
 
-
-//------Se déconnecter
+//*** Se déconnecter
 function logout() {
   // Suppression du token
   localStorage.removeItem('token');
 }
 
 
-
-
-//------Mode admin 
+//*** Mode admin 
 function isAdmin() {
   // si login est connecter
   if (localStorage.getItem('token')) {
@@ -257,26 +252,18 @@ function isAdmin() {
 
 
 
+//********************************//
 
-
-//*****************************************************************/
-
-//creation Modale pour modifier mes projets
-function createModal() {
-
-  //si login est connecté
-  if (localStorage.getItem('token')) {
-  //recup btn modifier
-  const modifier = document.querySelector('.edit')
-  //clique sur btn modifier ouvert la modale
-  modifier.addEventListener('click', function () {
-
+//*** creation Modale pour modifier mes projets
+function createModal(update) {
 
       //créer modal
       const modal = document.createElement('aside')
       modal.classList.add('modal')
-      //insert modal apres btn modifier pour eviter recreation de la modale
-      modifier.insertAdjacentElement('afterend', modal);
+
+      //insert modal apres click sur update work pour eviter recreation de la modale
+      //update parametre qui permet de créer modale apres click de modifier ou mode edition
+      update.insertAdjacentElement('afterend', modal);
 
       //créer le contenu de la modale
       const modalContent = document.createElement('div')
@@ -302,7 +289,7 @@ function createModal() {
       addImgModal(galleryModal)
 
       //appel fonction event click de la suppression
-      deleteIconEvent()
+      eventDeleteIcon()
 
       //créer boutton Ajouter une photo
       const btnAdd = document.createElement('button')
@@ -324,25 +311,24 @@ function createModal() {
           closeModal(modal)
         }
       }
-    })
-  }
-}
+    }
 
 
-//Ouverture de la modale
+
+//*** Ouverture de la modale
 function openModal(modal) {
   modal.style.display = 'block'
 }
 
 
-//Fermeture de la modale
+//*** Fermeture de la modale
 function closeModal(modal) {
     modal.style.display = 'none'
 }
 
 
 
-//Créer les img au conteneur galleryModal avec les icônes supression
+//*** Créer img au conteneur galleryModal avec les icônes supression
 function addImgModal(galleryModal) {
 
     for (let i = 0; i < listWorks.length; i++) {
@@ -372,7 +358,7 @@ function addImgModal(galleryModal) {
 
 
 
-//suppression Work
+//*** API Suppression Work
 function deleteWork(id) {
 
   const token = localStorage.getItem('token');
@@ -388,8 +374,8 @@ function deleteWork(id) {
 
 
 
-//event click icône supression img
-function deleteIconEvent() {
+//*** Event click Suppression Work
+function eventDeleteIcon() {
 
   //appel icône supression
   const deleteIcon = document.querySelectorAll('.fa-trash-can')
@@ -397,29 +383,67 @@ function deleteIconEvent() {
   //event click 
   deleteIcon.forEach(deleteIcon => {
     deleteIcon.addEventListener('click', function() {
+      //confirmation
       if (confirm('Are you sure you want to delete this work ?')) {
         deleteWork(deleteIcon.id);
       }
       //appel fonction supression
       deleteWork(deleteIcon.id)
       // refresh page
-      location.reload()
+      // location.reload()
     })
   })
 }
 
 
 
-//****************************************************************/
+//*** Event click Modifier Work
+function eventModifier() { 
+    //si login est connecté
+      if (localStorage.getItem('token')) {
+        //recup modifier
+        const modifier = document.querySelector('.edit')
+        //click sur btn modifier ouvert la modale
+        modifier.addEventListener('click', function () {
+          //appel fonction creation modale
+          createModal(modifier)
+        })
+      }
+}
 
-//-----Fonction initialisation
+
+//*** Event click Mode edition = modifier work
+function eventModeEdition() { 
+    //si login est connecté
+      if (localStorage.getItem('token')) {
+        //recup mode edition
+        const modeEdition = document.querySelector('.mode_edition')
+        //clique sur btn mode edition ouvert la modale
+        modeEdition.addEventListener('click', function () {
+          //appel fonction creation modale
+          createModal(modeEdition)
+        })
+      }
+}
+
+
+
+
+
+//********************************//
+
+//*** Fonction initialisation
 async function init() {
   await getWorks()
   await getCategories()
   createButtonCatg()
   showAllWorks()
   isAdmin()
-  createModal() 
+  eventModifier()
+  eventModeEdition()
+  // createModal() 
 }
 // appel pour l'initialisation
 init(); 
+
+//********************************//
