@@ -384,6 +384,26 @@ function deleteWork(id) {
 }
 
 
+
+//event click icône supression img
+function deleteIconEvent() {
+
+  //appel icône supression
+  const deleteIcon = document.querySelectorAll('.fa-trash-can')
+
+  //event click 
+  deleteIcon.forEach(deleteIcon => {
+    deleteIcon.addEventListener('click', function() {
+      //appel fonction supression
+      deleteWork(deleteIcon.id)
+      // refresh page
+      location.reload()
+    })
+  })
+}
+
+
+
 //****************************************************************/
 
 //-----Fonction initialisation
