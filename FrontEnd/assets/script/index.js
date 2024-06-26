@@ -300,6 +300,9 @@ function createModal() {
 
       //appel fonction - add images dans le conteneur gallery
       addImgModal(galleryModal)
+      
+      //appel fonction supression
+      deleteIconEvent()
 
       //créer boutton Ajouter une photo
       const btnAdd = document.createElement('button')
