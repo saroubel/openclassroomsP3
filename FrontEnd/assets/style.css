@@ -377,7 +377,8 @@ footer nav ul {
 .gallery_modal {
 	display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+	justify-content: flex-start; /* mettre les img à gauche*/
 	text-align: center;
 	margin: 40px;
     border-bottom: 1px solid #B3B3B3;

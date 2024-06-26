@@ -310,7 +310,7 @@ function createModal() {
 
       //appel fonction ouverture
       openModal(modal)
-      
+
       //clique fermeture sur icone close
       btnClose.addEventListener('click', function() {
         closeModal(modal)
@@ -321,8 +321,6 @@ function createModal() {
           closeModal(modal)
         }
       }
-
-
     })
   }
 }
@@ -349,11 +347,13 @@ function addImgModal(galleryModal) {
       //créer conteneur box pour img et icon
       const imgModalBox = document.createElement('div');
       imgModalBox.classList.add('img_modal_box');
+
       //créer img
         const imgModal = document.createElement('img')
         imgModal.src = listWorks[i].imageUrl // imgModal.setAttribute('src', listWorks[i].imageUrl)
         imgModal.alt = listWorks[i].title
         imgModal.classList.add('img_modal')
+
       //créer icône supression sur img
         const deleteIcon = document.createElement('i')
         deleteIcon.setAttribute('id', listWorks[i].id)
@@ -366,6 +366,23 @@ function addImgModal(galleryModal) {
         galleryModal.appendChild(imgModalBox);
    }
 }
+
+
+
+//suppression Work
+function deleteWork(id) {
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.error('No token found');
+    return;
+  }
+  fetch(`http://localhost:5678/api/works/${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` }
+  })  
+}
+
 
 //****************************************************************/
 
