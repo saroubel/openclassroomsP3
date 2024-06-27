@@ -296,6 +296,8 @@ function createModal(update) {
       btnAdd.textContent = 'Ajouter une photo'
       btnAdd.classList.add('btn_add')
       modalContent.appendChild(btnAdd)
+      //appel fonction event ajouter une photo
+      eventAddPhoto()
 
 
       //appel fonction ouverture
@@ -425,6 +427,63 @@ function eventModeEdition() {
         })
       }
 }
+
+
+//*** Event ajouter une photo
+function eventAddPhoto() { 
+    
+        //recup les elements de la modale existante et btn ajout
+        const modalContent = document.querySelector('.modal_content')
+        const btnAdd = document.querySelector('.btn_add')
+        const modalTitle = document.querySelector('h3')
+        const galleryModal = document.querySelector('.gallery_modal')
+
+        //click -> ouvert la modale 2 d'ajout
+        btnAdd.addEventListener('click', function () {
+
+            // Créer icône back pour retourner à la modale précédente
+            const backBtn = document.createElement('i')
+            backBtn.classList.add('fa-solid', 'fa-arrow-left')
+            backBtn.setAttribute('id', 'back_btn')
+            // Ajouter icône back à modalContent avec insertAdjacentElement pour que l'icône soit en haut
+            modalContent.insertAdjacentElement('afterbegin', backBtn)
+
+            // Changer titre modal
+            modalTitle.textContent = 'Ajout photo'
+
+            // Cachez le conteneur gallery de modale existant
+            galleryModal.style.display = 'none'
+
+            // Créer nv section pour ajouter une photo
+            const addPhotoModal = document.createElement('div')
+            addPhotoModal.classList.add('add_photo_modal')
+            modalContent.appendChild(addPhotoModal)
+
+            // Affichez nv section 
+            // addPhotoModal.style.display = 'block'
+            
+        })
+}
+
+//*** Event retour à la modale précédente
+// function eventRetour() {
+//   const modal = document.querySelector('.modal')
+
+//   //créer
+//   const backBtn = document.createElement('i')
+//   backBtn.classList.add('fa-solid', 'fa-arrow-left')
+//   backBtn.setAttribute('id', 'back_btn')
+//   // Ajouter icône back à modalContent avec insertAdjacentElement pour que l'icône soit en haut
+//   modalContent.insertAdjacentElement('afterbegin', backBtn)
+
+//   //click
+//   backBtn.addEventListener('click', function() {
+//     //cacher modale 2
+//     addPhotoModal.style.display = 'none'
+//     //afficher modale 1
+//     modalContent.style.display = 'block'
+// })
+// }
 
 
 
