@@ -340,7 +340,7 @@ footer nav ul {
 }
 
 /* contenu de la modale */
-.modal_content {
+.modal_content_1 {
 	background-color: white;
 	margin: 10% auto;
 	padding: 20px;
@@ -353,16 +353,22 @@ footer nav ul {
 	align-items: center;
 }
 
-/* icone fermeture */
-.modal_content .fa-xmark {
+/* div fermeture et retour */
+.div_close_back {
 	display: flex;
-	align-self: flex-end;
+	justify-content: space-between;
+	width: 100%;
+}
+
+/* icone fermeture */
+.modal_content_1 .fa-xmark {
+	margin-left: auto; 	/* Pousse l'icône vers la droite */
 	font-size: 24px;
 	cursor: pointer;
 }
 
 /* titre modale */
-.modal_content h3 {
+.modal_content_1 h3 {
 	display: flex;
 	justify-content: center;
 	text-align: center;
@@ -441,9 +447,8 @@ footer nav ul {
 
 
 /* modale 2 */
-.modal_content .fa-arrow-left {
-    display: flex;
-    align-self: flex-start;
+/* icone retour */
+.modal_content_1 .fa-arrow-left {
     font-size: 24px;
     cursor: pointer;
 }

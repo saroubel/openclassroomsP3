@@ -265,25 +265,30 @@ function createModal(update) {
       //update parametre qui permet de créer modale apres click de modifier ou mode edition
       update.insertAdjacentElement('afterend', modal);
 
-      //créer le contenu de la modale
-      const modalContent = document.createElement('div')
-      modalContent.classList.add('modal_content')
-      modal.appendChild(modalContent);
+      //créer le contenu de la modale pour supression img
+      const modalContent1 = document.createElement('div')
+      modalContent1.classList.add('modal_content_1')
+      modal.appendChild(modalContent1);
+
+      //créer div pour icônes close et retour
+      const divCloseBack = document.createElement('div')
+      divCloseBack.classList.add('div_close_back')
+      modalContent1.appendChild(divCloseBack);
 
       //créer icone close 
       const btnClose = document.createElement('i')
       btnClose.classList.add('fa-solid', 'fa-xmark')
-      modalContent.appendChild(btnClose)
+      divCloseBack.appendChild(btnClose)
 
       //créer titre modal
       const modalTitle = document.createElement('h3')
       modalTitle.textContent = 'Galerie photo'
-      modalContent.appendChild(modalTitle)
+      modalContent1.appendChild(modalTitle)
 
       //créer conteneur gallery 
        const galleryModal = document.createElement('div')
        galleryModal.classList.add('gallery_modal')
-       modalContent.appendChild(galleryModal)
+       modalContent1.appendChild(galleryModal)
 
       //appel fonction - add images dans le conteneur gallery
       addImgModal(galleryModal)
@@ -295,19 +300,16 @@ function createModal(update) {
       const btnAdd = document.createElement('button')
       btnAdd.textContent = 'Ajouter une photo'
       btnAdd.classList.add('btn_add')
-      modalContent.appendChild(btnAdd)
+      modalContent1.appendChild(btnAdd)
       //appel fonction event ajouter une photo
       eventAddPhoto()
 
-
-      //appel fonction ouverture
+      //ouverture - appel fonction
       openModal(modal)
-
-      //clique fermeture sur icone close
+      //fermeture click sur icone close
       btnClose.addEventListener('click', function() {
-        closeModal(modal)
-      })
-      //clique fermeture en dehors de la modale
+        closeModal(modal) })
+      //fermeture click en dehors de la modale
       window.onclick = function(event) {
         if (event.target === modal) {
           closeModal(modal)
@@ -429,11 +431,12 @@ function eventModeEdition() {
 }
 
 
-//*** Event ajouter une photo
+//*** Event boutton ajouter une photo
 function eventAddPhoto() { 
     
         //recup les elements de la modale existante et btn ajout
-        const modalContent = document.querySelector('.modal_content')
+        const modalContent1 = document.querySelector('.modal_content_1')
+        const div_close_back = document.querySelector('.div_close_back')
         const btnAdd = document.querySelector('.btn_add')
         const modalTitle = document.querySelector('h3')
         const galleryModal = document.querySelector('.gallery_modal')
@@ -445,8 +448,9 @@ function eventAddPhoto() {
             const backBtn = document.createElement('i')
             backBtn.classList.add('fa-solid', 'fa-arrow-left')
             backBtn.setAttribute('id', 'back_btn')
-            // Ajouter icône back à modalContent avec insertAdjacentElement pour que l'icône soit en haut
-            modalContent.insertAdjacentElement('afterbegin', backBtn)
+            // Ajouter icône back à modalContent1 avec insertAdjacentElement pour que l'icône soit en haut
+            div_close_back.insertAdjacentElement('afterbegin', backBtn)
+
 
             // Changer titre modal
             modalTitle.textContent = 'Ajout photo'
@@ -457,13 +461,15 @@ function eventAddPhoto() {
             // Créer nv section pour ajouter une photo
             const addPhotoModal = document.createElement('div')
             addPhotoModal.classList.add('add_photo_modal')
-            modalContent.appendChild(addPhotoModal)
+            modalContent1.appendChild(addPhotoModal)
 
             // Affichez nv section 
             // addPhotoModal.style.display = 'block'
             
         })
 }
+
+
 
 //*** Event retour à la modale précédente
 // function eventRetour() {
@@ -473,15 +479,15 @@ function eventAddPhoto() {
 //   const backBtn = document.createElement('i')
 //   backBtn.classList.add('fa-solid', 'fa-arrow-left')
 //   backBtn.setAttribute('id', 'back_btn')
-//   // Ajouter icône back à modalContent avec insertAdjacentElement pour que l'icône soit en haut
-//   modalContent.insertAdjacentElement('afterbegin', backBtn)
+//   // Ajouter icône back à modalContent1 avec insertAdjacentElement pour que l'icône soit en haut
+//   modalContent1.insertAdjacentElement('afterbegin', backBtn)
 
 //   //click
 //   backBtn.addEventListener('click', function() {
 //     //cacher modale 2
 //     addPhotoModal.style.display = 'none'
 //     //afficher modale 1
-//     modalContent.style.display = 'block'
+//     modalContent1.style.display = 'block'
 // })
 // }
 
