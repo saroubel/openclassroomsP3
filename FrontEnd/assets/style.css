@@ -513,6 +513,24 @@ footer nav ul {
 	color: black;
 }
 
+/* bouton valider */
+.btn_valider {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: syne;
+	font-size: 14px;
+	font-weight: 700;
+	color: white;
+	height: 36px;
+	width: 237px;
+	background-color: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+
 
 
 

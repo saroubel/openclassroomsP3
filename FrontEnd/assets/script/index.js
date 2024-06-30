@@ -495,11 +495,27 @@ function eventAddPhoto() {
             const fileMaxSize = document.createElement("p")
             fileMaxSize.classList.add("max_size")
             fileMaxSize.textContent = "Jpg, png: 4Mo max"
-            uploaderImg.appendChild(fileMaxSize)
+            uploaderImg.appendChild(fileMaxSize) 
             
+
+            // Créer champs titre
+            // Créer champs catégorie
+            
+
+            // Créer bouton valider
+            const btnValider = document.createElement("button")
+            btnValider.classList.add("btn_valider")
+            btnValider.textContent = "Valider"
+            modalContent1.appendChild(btnValider)
         })
+
+
 }
 
+
+//*** Event boutton valider
+//*** Event boutton valider
+//*** Event boutton valider
 
 
 //*** Event retour à la modale précédente
