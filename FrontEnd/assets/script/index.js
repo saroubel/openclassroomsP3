@@ -451,20 +451,51 @@ function eventAddPhoto() {
             // Ajouter icône back à modalContent1 avec insertAdjacentElement pour que l'icône soit en haut
             div_close_back.insertAdjacentElement('afterbegin', backBtn)
 
-
             // Changer titre modal
             modalTitle.textContent = 'Ajout photo'
 
             // Cachez le conteneur gallery de modale existant
             galleryModal.style.display = 'none'
 
-            // Créer nv section pour ajouter une photo
-            const addPhotoModal = document.createElement('div')
-            addPhotoModal.classList.add('add_photo_modal')
-            modalContent1.appendChild(addPhotoModal)
+            // Cacher bouton ajouter une photo
+            btnAdd.style.display = 'none'
 
-            // Affichez nv section 
-            // addPhotoModal.style.display = 'block'
+            // Créer uploader image
+            const uploaderImg = document.createElement('div')
+            uploaderImg.classList.add('uploader_img')
+            modalContent1.appendChild(uploaderImg)
+
+            // Créer file icon
+            const fileIcon = document.createElement("i")
+            fileIcon.classList.add("fa-regular", "fa-image")
+            uploaderImg.appendChild(fileIcon)
+
+            // Créer file label
+            const fileLabel = document.createElement("label")
+            fileLabel.textContent = "+ Ajouter photo"
+            fileLabel.classList.add("fileLabel")
+            // fileLabel.style.cursor = "pointer"
+            // fileLabel.setAttribute("for", "file")
+            uploaderImg.appendChild(fileLabel)
+
+            // Créer file input
+            const fileInput = document.createElement("input")
+            fileInput.type = "file"
+            fileInput.id = "file"
+            fileInput.name = "images"
+            uploaderImg.appendChild(fileInput)
+
+            // Créer image preview
+            // Créer image preview
+            // Créer image preview
+
+
+
+            // Créer file max Size 
+            const fileMaxSize = document.createElement("p")
+            fileMaxSize.classList.add("max_size")
+            fileMaxSize.textContent = "Jpg, png: 4Mo max"
+            uploaderImg.appendChild(fileMaxSize)
             
         })
 }
@@ -472,24 +503,8 @@ function eventAddPhoto() {
 
 
 //*** Event retour à la modale précédente
-// function eventRetour() {
-//   const modal = document.querySelector('.modal')
-
-//   //créer
-//   const backBtn = document.createElement('i')
-//   backBtn.classList.add('fa-solid', 'fa-arrow-left')
-//   backBtn.setAttribute('id', 'back_btn')
-//   // Ajouter icône back à modalContent1 avec insertAdjacentElement pour que l'icône soit en haut
-//   modalContent1.insertAdjacentElement('afterbegin', backBtn)
-
-//   //click
-//   backBtn.addEventListener('click', function() {
-//     //cacher modale 2
-//     addPhotoModal.style.display = 'none'
-//     //afficher modale 1
-//     modalContent1.style.display = 'block'
-// })
-// }
+//*** Event retour à la modale précédente
+//*** Event retour à la modale précédente
 
 
 

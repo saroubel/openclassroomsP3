@@ -453,6 +453,68 @@ footer nav ul {
     cursor: pointer;
 }
 
+/* uploader image */
+.uploader_img {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	font-family: work sans;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	margin: 40px;
+	height: 169px;
+	width: 420px;
+	gap : 5px; 
+	/* cursor: pointer; */
+}
+
+/* icone file */
+.uploader_img .fa-image {
+	font-size: 76px;
+	color: #CBD6D9;
+	margin: 0px;
+	padding: 30px;
+}
+
+/* label ajouter photo */
+.uploader_img label {
+	font-size: 14px;
+	font-weight: 500;
+	color: #306685;
+	cursor: pointer;
+
+	border: 1px solid red;
+    border-radius: 50px;
+	padding: 10px;
+
+	width: 173px;
+	text-align: center;
+
+}
+
+/* input file */
+.uploader_img input {
+	display: none;
+	color: #CBD6DC;
+}
+
+/* preview image */
+/* preview image */
+/* preview image */
+
+
+
+/* max size txt */
+.max_size  {
+	font-size: 10px;
+	font-weight: 400;
+	color: black;
+}
+
+
+
 
 
 
