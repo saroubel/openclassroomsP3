@@ -326,8 +326,17 @@ function openModal(modal) {
 
 
 //*** Fermeture de la modale
-function closeModal(modal) {
-    modal.style.display = 'none'
+async function closeModal(modal) {
+  modal.style.display = 'none'
+
+    //supprimer gallery index aprés fermeture de la modale pour mettre à jour des works
+      //vider gallery
+      let gallery = document.querySelector('.gallery')  
+      gallery.innerHTML = ''  
+      //recharger works
+      await getWorks()
+      //afficher works
+      showAllWorks()  
 }
 
 
