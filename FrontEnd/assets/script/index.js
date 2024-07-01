@@ -9,7 +9,7 @@ async function getWorks() {                                 // exécute des opé
             listWorks=data
 
             // afficher les works
-            // console.log(listWorks)                          
+            console.log(listWorks)                          
 
           } )
 }
@@ -363,18 +363,34 @@ function addImgModal(galleryModal) {
 
 
 //*** API Suppression Work
-function deleteWork(id) {
+  //async pour pouvoir utiliser await pour l'attente des works 
+async function deleteWork(id) {
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token')
   if (!token) {
-    console.error('No token found');
+    console.error('No token found')
     return;
   }
   fetch(`http://localhost:5678/api/works/${id}`, {
     method: 'DELETE',
     headers: { 'Authorization': `Bearer ${token}` }
   })  
+
+  //**Mettre à jour la liste des works aprés suppression
+      //suppression img dans le conteneur galleryModal
+        const galleryModal = document.querySelector('.gallery_modal')
+        galleryModal.innerHTML = ''
+
+      //appel Api pour recharger la liste des works
+        await getWorks()
+
+      //appel fonction ajout les img avec les icônes delete
+        addImgModal(galleryModal)
+
+      //appel fonction event click suppression pour les icônes
+        eventDeleteIcon()
 }
+
 
 
 
@@ -389,13 +405,10 @@ function eventDeleteIcon() {
     deleteIcon.addEventListener('click', function() {
       //confirmation
       if (confirm('Are you sure you want to delete this work ?')) {
-        deleteWork(deleteIcon.id);
+        deleteWork(deleteIcon.id)
       }
-      //appel fonction supression
-      deleteWork(deleteIcon.id)
-      // refresh page
-      // location.reload()
-    })
+      })
+      
   })
 }
 
@@ -537,7 +550,6 @@ async function init() {
   isAdmin()
   eventModifier()
   eventModeEdition()
-  // createModal() 
 }
 // appel pour l'initialisation
 init(); 
