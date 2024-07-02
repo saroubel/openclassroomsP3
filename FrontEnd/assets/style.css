@@ -525,10 +525,15 @@ footer nav ul {
 	color: white;
 	height: 36px;
 	width: 237px;
-	background-color: #1D6154;
-	border: 1px solid #1D6154;
+	background-color: #A7A7A7;
+    border: 1px solid #A7A7A7;
 	border-radius: 60px;
-	cursor: pointer;
+    cursor: pointer;
+	/* background-color: #1D6154; */
+    /* border: 1px solid #1D6154; */
+    
+    
+	
 }
 
 

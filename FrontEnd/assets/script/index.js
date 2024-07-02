@@ -9,7 +9,7 @@ async function getWorks() {                                 // exécute des opé
             listWorks=data
 
             // afficher les works
-            console.log(listWorks)                          
+            // console.log(listWorks)                          
 
           } )
 }
@@ -326,6 +326,7 @@ function openModal(modal) {
 
 
 //*** Fermeture de la modale
+  //async pour waiter l'envoi de getWorks
 async function closeModal(modal) {
   modal.style.display = 'none'
 
@@ -521,7 +522,27 @@ function eventAddPhoto() {
             
 
             // Créer champs titre
+            const titleLabel = document.createElement("p")
+            titleLabel.classList.add("title_label")
+            titleLabel.textContent = "Titre"
+            modalContent1.appendChild(titleLabel)
+
+            const titleInput = document.createElement("input")
+            titleInput.type = "text"
+            titleInput.id = "title"
+            titleInput.name = "title"
+            modalContent1.appendChild(titleInput)
+
             // Créer champs catégorie
+            const categoryLabel = document.createElement("p")
+            categoryLabel.classList.add("category_label")
+            categoryLabel.textContent = "Catégorie"
+            modalContent1.appendChild(categoryLabel)
+
+            const categorySelect = document.createElement("select")
+            categorySelect.id = "category"
+            categorySelect.name = "category"
+            modalContent1.appendChild(categorySelect)
             
 
             // Créer bouton valider
