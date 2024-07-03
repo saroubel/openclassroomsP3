@@ -511,40 +511,52 @@ function eventAddPhoto() {
             // Créer image preview
             // Créer image preview
             // Créer image preview
-
-
-
+          
             // Créer file max Size 
             const fileMaxSize = document.createElement("p")
             fileMaxSize.classList.add("max_size")
             fileMaxSize.textContent = "Jpg, png: 4Mo max"
             uploaderImg.appendChild(fileMaxSize) 
             
+            //********/
+            // Créer formulaire
+            const form = document.createElement("form")
+            form.id = "form"
+            form.classList.add("form_modal")
+            modalContent1.appendChild(form)
 
             // Créer champs titre
             const titleLabel = document.createElement("p")
-            titleLabel.classList.add("title_label")
+            titleLabel.classList.add("form_label")
             titleLabel.textContent = "Titre"
-            modalContent1.appendChild(titleLabel)
+            form.appendChild(titleLabel)
 
             const titleInput = document.createElement("input")
             titleInput.type = "text"
-            titleInput.id = "title"
+            titleInput.id = "title_input"
             titleInput.name = "title"
-            modalContent1.appendChild(titleInput)
+            form.appendChild(titleInput)
 
             // Créer champs catégorie
             const categoryLabel = document.createElement("p")
-            categoryLabel.classList.add("category_label")
+            categoryLabel.classList.add("form_label")
             categoryLabel.textContent = "Catégorie"
-            modalContent1.appendChild(categoryLabel)
+            form.appendChild(categoryLabel)
 
             const categorySelect = document.createElement("select")
-            categorySelect.id = "category"
+            categorySelect.id = "category_select"
             categorySelect.name = "category"
-            modalContent1.appendChild(categorySelect)
-            
+            //remplir select avec les catégories
+            for (let i = 0; i < categories.length; i++) {
+                const option = document.createElement("option")
+                option.value = categories[i].name
+                option.textContent = categories[i].name
+                categorySelect.appendChild(option)
+            }
+            form.appendChild(categorySelect)
 
+
+            //********/
             // Créer bouton valider
             const btnValider = document.createElement("button")
             btnValider.classList.add("btn_valider")
