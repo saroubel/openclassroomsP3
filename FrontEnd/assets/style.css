@@ -338,12 +338,13 @@ footer nav ul {
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.5);
+	overflow-y: hidden; /* masquer le double scroll vertical */
 }
 
 /* contenu de la modale */
 .modal_content_1 {
 	background-color: #FFFFFF;
-	margin: 10% auto;
+	margin: 4% auto;
 	padding: 20px;
 	border: 1px solid #888;
 	max-width: 34%; /*dimmention temporaire*/
