@@ -473,6 +473,8 @@ function eventAddPhoto() {
             backBtn.setAttribute('id', 'back_btn')
             // Ajouter icône back à modalContent1 avec insertAdjacentElement pour que l'icône soit en haut
             div_close_back.insertAdjacentElement('afterbegin', backBtn)
+            //appel fonction event back pour retourner à la modale précedente
+            eventBack()
 
             // Changer titre modal
             modalTitle.textContent = 'Ajout photo'
@@ -678,7 +680,18 @@ async function addWork() {
 
 //*** Event retour à la modale précédente
 //*** Event retour à la modale précédente
-//*** Event retour à la modale précédente
+function eventBack() {
+  const modal = document.querySelector('.modal')
+  const backBtn = document.getElementById('back_btn')
+  const modifier = document.querySelector('.edit')
+
+  //click pour retourner à la modale 1
+  backBtn.addEventListener('click', function() {
+    modal.remove()
+    //Appel fontion creation modale 1
+    createModal(modifier)
+  })
+}
 
 
 
