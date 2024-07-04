@@ -264,6 +264,8 @@ a:hover {
 
 .gallery img {
 	width: 100%;
+	height: 500px;
+    object-fit: cover;
 }
 
 /* titre sous l'image  */
@@ -395,6 +397,8 @@ footer nav ul {
 .img_modal {
 	margin: 5px;
 	width: 100%;
+	height: 102px;
+    object-fit: cover;
 }
 
 
