@@ -264,7 +264,6 @@ a:hover {
 
 .gallery img {
 	width: 100%;
-
 }
 
 /* titre sous l'image  */
@@ -503,8 +502,12 @@ footer nav ul {
 }
 
 /* preview image */
-/* preview image */
-/* preview image */
+.image_preview {
+	display: none; 		/* Cache le contenu de l'image */
+	object-fit: cover;  /* Pour couper l'image si elle est trop grande */
+	height: 169px;
+    width: 129px;
+}
 
 
 
