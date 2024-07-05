@@ -473,6 +473,8 @@ function eventAddPhoto() {
             backBtn.setAttribute('id', 'back_btn')
             // Ajouter icône back à modalContent1 avec insertAdjacentElement pour que l'icône soit en haut
             div_close_back.insertAdjacentElement('afterbegin', backBtn)
+            //appel fonction event back pour retourner à la modale précedente
+            eventBack()
 
             // Changer titre modal
             modalTitle.textContent = 'Ajout photo'
@@ -488,29 +490,38 @@ function eventAddPhoto() {
             uploaderImg.classList.add('uploader_img')
             modalContent1.appendChild(uploaderImg)
 
-            // Créer file icon
+            // Créer icon file
             const fileIcon = document.createElement("i")
             fileIcon.classList.add("fa-regular", "fa-image")
             uploaderImg.appendChild(fileIcon)
 
-            // Créer file label
+            // Créer label ajouter photo
             const fileLabel = document.createElement("label")
             fileLabel.textContent = "+ Ajouter photo"
-            fileLabel.classList.add("fileLabel")
-            // fileLabel.style.cursor = "pointer"
-            // fileLabel.setAttribute("for", "file")
+            fileLabel.classList.add("file_label")
+            fileLabel.setAttribute("for", "file")
             uploaderImg.appendChild(fileLabel)
 
-            // Créer file input
+            // Créer file input pour choisir image depuis pc
             const fileInput = document.createElement("input")
             fileInput.type = "file"
             fileInput.id = "file"
-            fileInput.name = "images"
+            fileInput.name = "images" 
+            fileInput.setAttribute("accept", ".jpg, .jpeg, .png")
+            fileInput.addEventListener("change", function () {
+              eventValider()
+              })
             uploaderImg.appendChild(fileInput)
 
             // Créer image preview
-            // Créer image preview
-            // Créer image preview
+            const imagePreview = document.createElement("img")
+            imagePreview.className = "image_preview"
+            imagePreview.setAttribute("src", "#")
+            imagePreview.setAttribute("alt", "Aperçu de l'image") // affiche just les img 
+            uploaderImg.appendChild(imagePreview)
+
+            // appel fonction charger image
+            eventLoadImg() 
           
             // Créer file max Size 
             const fileMaxSize = document.createElement("p")
@@ -535,6 +546,10 @@ function eventAddPhoto() {
             titleInput.type = "text"
             titleInput.id = "title_input"
             titleInput.name = "title"
+            titleInput.setAttribute("required", "required")
+            titleInput.addEventListener("change", function () {
+              eventValider()
+              })
             form.appendChild(titleInput)
 
             // Créer champs catégorie
@@ -546,15 +561,18 @@ function eventAddPhoto() {
             const categorySelect = document.createElement("select")
             categorySelect.id = "category_select"
             categorySelect.name = "category"
+            categorySelect.setAttribute("required", "required")
+            categorySelect.addEventListener("change", function () {
+              eventValider()
+              })
             //remplir select avec les catégories
             for (let i = 0; i < categories.length; i++) {
                 const option = document.createElement("option")
-                option.value = categories[i].name
+                option.value = categories[i].id   //changer nom vers id pour utiliser comme valeur dans l'API dans addWork()
                 option.textContent = categories[i].name
                 categorySelect.appendChild(option)
             }
             form.appendChild(categorySelect)
-
 
             //********/
             // Créer bouton valider
@@ -563,21 +581,114 @@ function eventAddPhoto() {
             btnValider.textContent = "Valider"
             modalContent1.appendChild(btnValider)
         })
+}
 
 
+// *** Event charger photo depuis pc
+function eventLoadImg() {
+
+    const fileInput = document.querySelector('#file') 
+    //changement fichier dans input
+    fileInput.addEventListener('change', function () {
+        //Créer fichier pour lire l'img
+        const file = this.files[0]
+        const reader = new FileReader()
+        //lire emplacement img
+        reader.readAsDataURL(file)
+        //attendre que l'img soit lue
+        reader.addEventListener('load', function () {
+            const imagePreview = document.querySelector('.image_preview')
+            //afficher l'img
+            imagePreview.src = reader.result
+            imagePreview.style.display = 'block'
+
+            //cacher les élements uploader et afficher img preview
+            const fileIcon = document.querySelector('.fa-image')
+            fileIcon.style.display = 'none'
+            const fileLabel = document.querySelector('.file_label')
+            fileLabel.style.display = 'none'
+            const fileMaxSize = document.querySelector('.max_size')
+            fileMaxSize.style.display = 'none'
+        })
+    })
 }
 
 
 //*** Event boutton valider
-//*** Event boutton valider
-//*** Event boutton valider
+async function eventValider() {
+  //les champs à verifier sont remplis
+  const fileInput = document.getElementById("file")
+  const titleInput = document.getElementById("title_input")
+  const categorySelect = document.getElementById("category_select")
+  const btnValider = document.querySelector(".btn_valider")
+  //les champs à vider après l'ajout
+  const previewImg = document.querySelector('.image_preview')
+  const fileIcon = document.querySelector('.fa-image')
+  const fileLabel = document.querySelector('.file_label')
+  const fileMaxSize = document.querySelector('.max_size')
+
+  //vérifier que les champs sont remplis
+  if (titleInput.value === "" || categorySelect.value === "" || fileInput.value === "") 
+    //bouton reste gris
+    { btnValider.style.backgroundColor = "#A7A7A7" } 
+    else {  
+    //bouton en vert pour indiquer qu'il est valide + event click pour ajouter nv work
+    btnValider.style.backgroundColor = "#1D6154"
+
+    btnValider.addEventListener("click", async function () {
+      await addWork() //ajouter nv work avec await pour attendre la fin de l'ajout
+
+      //vider champs formulaire// vider champs aprés ajout nouvelle work
+      fileIcon.style.display = ""
+      fileLabel.style.display = ""
+      fileMaxSize.style.display = ""  
+      previewImg.style.display = "none" 
+      titleInput.value = ''
+      categorySelect.value = ''
+
+      //appel Api pour recharger la liste des works
+      await getWorks()
+
+    } )
+    }
+}
+
+
+//*** Ajouter nouvelle work + appel API 
+async function addWork() {
+  const fileInput = document.getElementById("file")
+  const titleInput = document.getElementById("title_input")
+  const categorySelect = document.getElementById("category_select")
+  const token = localStorage.getItem('token')
+
+    //**Créer formData où on peut ajouter le fichier */
+    const formData = new FormData()
+    formData.append("image", fileInput.files[0]) //0 pour avoir le premier fichier
+    formData.append("title", titleInput.value)
+    formData.append("category", categorySelect.value)
+
+    //**appel API de work POST + autorisation avec le token */
+      fetch(`http://localhost:5678/api/works`, {
+        method: "POST",             
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: formData
+      })   
+}
 
 
 //*** Event retour à la modale précédente
-//*** Event retour à la modale précédente
-//*** Event retour à la modale précédente
+function eventBack() {
+  const modal = document.querySelector('.modal')
+  const backBtn = document.getElementById('back_btn')
+  const modifier = document.querySelector('.edit')
 
-
+  //click pour retourner à la modale 1
+    backBtn.addEventListener('click', function() {
+      //supprimer la modale et puis recréer 
+      modal.remove()
+      createModal(modifier)
+    })
+}
 
 
 
@@ -595,5 +706,3 @@ async function init() {
 }
 // appel pour l'initialisation
 init(); 
-
-//********************************//

@@ -97,11 +97,12 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
+
 section {
-	margin: 50px 0
-}f
+	margin: 50px 0;
+}
 
 h1{
 	display: flex;
@@ -109,14 +110,13 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C;
 }
 
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -264,7 +264,8 @@ a:hover {
 
 .gallery img {
 	width: 100%;
-
+	height: 500px;
+    object-fit: cover;
 }
 
 /* titre sous l'image  */
@@ -337,12 +338,13 @@ footer nav ul {
 	height: 100%;
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.5);
+	overflow-y: hidden; /* masquer le double scroll vertical */
 }
 
 /* contenu de la modale */
 .modal_content_1 {
 	background-color: #FFFFFF;
-	margin: 10% auto;
+	margin: 4% auto;
 	padding: 20px;
 	border: 1px solid #888;
 	max-width: 34%; /*dimmention temporaire*/
@@ -389,6 +391,8 @@ footer nav ul {
     padding-bottom: 30px;
 	margin-left: 40px;
 	margin-right: 40px;
+	height: 336px;	  /* fixer hauteur */
+    overflow-x: auto; /* scroll horizontale sur le conteneur des img de la modale pour ne pas la dépasser*/
 }
 
 
@@ -396,6 +400,8 @@ footer nav ul {
 .img_modal {
 	margin: 5px;
 	width: 100%;
+	height: 102px;
+    object-fit: cover;
 }
 
 
@@ -503,8 +509,12 @@ footer nav ul {
 }
 
 /* preview image */
-/* preview image */
-/* preview image */
+.image_preview {
+	display: none; 		/* Cache le contenu de l'image */
+	object-fit: cover;  /* Pour couper l'image si elle est trop grande */
+	height: 169px;
+    width: 129px;
+}
 
 
 
