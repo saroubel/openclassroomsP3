@@ -581,8 +581,6 @@ function eventAddPhoto() {
             btnValider.textContent = "Valider"
             modalContent1.appendChild(btnValider)
         })
-
-
 }
 
 
@@ -656,7 +654,7 @@ async function eventValider() {
 }
 
 
-//*** Ajouter nouvelle work
+//*** Ajouter nouvelle work + appel API 
 async function addWork() {
   const fileInput = document.getElementById("file")
   const titleInput = document.getElementById("title_input")
@@ -675,10 +673,9 @@ async function addWork() {
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData
       })   
-    
 }
 
-//*** Event retour à la modale précédente
+
 //*** Event retour à la modale précédente
 function eventBack() {
   const modal = document.querySelector('.modal')
@@ -686,11 +683,11 @@ function eventBack() {
   const modifier = document.querySelector('.edit')
 
   //click pour retourner à la modale 1
-  backBtn.addEventListener('click', function() {
-    modal.remove()
-    //Appel fontion creation modale 1
-    createModal(modifier)
-  })
+    backBtn.addEventListener('click', function() {
+      //supprimer la modale et puis recréer 
+      modal.remove()
+      createModal(modifier)
+    })
 }
 
 
