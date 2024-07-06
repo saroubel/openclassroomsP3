@@ -626,6 +626,7 @@ async function eventValider() {
   const fileIcon = document.querySelector('.fa-image')
   const fileLabel = document.querySelector('.file_label')
   const fileMaxSize = document.querySelector('.max_size')
+  const modalContent1 = document.querySelector('.modal_content_1')
 
   //vérifier que les champs sont remplis
   if (titleInput.value === "" || categorySelect.value === "" || fileInput.value === "") 
@@ -638,6 +639,13 @@ async function eventValider() {
     btnValider.addEventListener("click", async function () {
       await addWork() //ajouter nv work avec await pour attendre la fin de l'ajout
 
+      //message après l'ajout
+      const message = document.createElement('div')
+      message.textContent = "Le work a été ajouté avec succès !"
+      message.classList.add('message_ajout')
+      modalContent1.appendChild(message)
+      setTimeout(() => message.remove(), 2000) // Le message disparaît après 2 secondes
+
       //vider champs formulaire// vider champs aprés ajout nouvelle work
       fileIcon.style.display = ""
       fileLabel.style.display = ""
@@ -645,6 +653,7 @@ async function eventValider() {
       previewImg.style.display = "none" 
       titleInput.value = ''
       categorySelect.value = ''
+      btnValider.style.backgroundColor = "#A7A7A7" 
 
       //appel Api pour recharger la liste des works
       await getWorks()
@@ -652,6 +661,9 @@ async function eventValider() {
     } )
     }
 }
+
+
+
 
 
 //*** Ajouter nouvelle work + appel API 
@@ -674,6 +686,7 @@ async function addWork() {
         body: formData
       })   
 }
+
 
 
 //*** Event retour à la modale précédente
