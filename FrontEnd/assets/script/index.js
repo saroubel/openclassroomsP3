@@ -565,6 +565,11 @@ function eventAddPhoto() {
             categorySelect.addEventListener("change", function () {
               eventValider()
               })
+            //remplir une option par défaut sans valeur 
+            const defaultOption = document.createElement("option")
+            defaultOption.value = ""
+            defaultOption.textContent = "Choisissez une catégorie"
+            categorySelect.appendChild(defaultOption)
             //remplir select avec les catégories
             for (let i = 0; i < categories.length; i++) {
                 const option = document.createElement("option")
@@ -637,9 +642,13 @@ async function eventValider() {
     btnValider.style.backgroundColor = "#1D6154"
 
     btnValider.addEventListener("click", async function () {
+      //verification si les champs sont vide apres ajout nouvelle work 
+      //verification si les champs sont vide apres ajout nouvelle work 
+      //verification si les champs sont vide apres ajout nouvelle work 
+
       await addWork() //ajouter nv work avec await pour attendre la fin de l'ajout
 
-      //message après l'ajout
+      // message après l'ajout
       const message = document.createElement('div')
       message.textContent = "Le work a été ajouté avec succès !"
       message.classList.add('message_ajout')
@@ -654,6 +663,8 @@ async function eventValider() {
       titleInput.value = ''
       categorySelect.value = ''
       btnValider.style.backgroundColor = "#A7A7A7" 
+      //vider event click pour ajouter nv work
+      // btnValider.removeEventListener("click", addWork)
 
       //appel Api pour recharger la liste des works
       await getWorks()
