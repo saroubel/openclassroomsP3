@@ -619,58 +619,107 @@ function eventLoadImg() {
 }
 
 
-//*** Event boutton valider
+
+
+//*** Event bouton valider
 async function eventValider() {
-  //les champs à verifier sont remplis
+  // Les éléments du formulaire
   const fileInput = document.getElementById("file")
   const titleInput = document.getElementById("title_input")
   const categorySelect = document.getElementById("category_select")
+  const form = document.getElementById("form")
   const btnValider = document.querySelector(".btn_valider")
-  //les champs à vider après l'ajout
+  // Les éléments à manipuler après l'ajout
   const previewImg = document.querySelector('.image_preview')
   const fileIcon = document.querySelector('.fa-image')
   const fileLabel = document.querySelector('.file_label')
   const fileMaxSize = document.querySelector('.max_size')
   const modalContent1 = document.querySelector('.modal_content_1')
 
-  //vérifier que les champs sont remplis
-  if (titleInput.value === "" || categorySelect.value === "" || fileInput.value === "") 
-    //bouton reste gris
-    { btnValider.style.backgroundColor = "#A7A7A7" } 
-    else {  
-    //bouton en vert pour indiquer qu'il est valide + event click pour ajouter nv work
-    btnValider.style.backgroundColor = "#1D6154"
+  //** Vérifier si tous les champs sont remplis
+  function checkFields() {
+    return titleInput.value.trim() !== "" && categorySelect.value !== "" && fileInput.files.length > 0 
+  }
 
-    btnValider.addEventListener("click", async function () {
-      //verification si les champs sont vide apres ajout nouvelle work 
-      //verification si les champs sont vide apres ajout nouvelle work 
-      //verification si les champs sont vide apres ajout nouvelle work 
+  //** Mise à jour l'état du bouton 
+  function updateButtonState() {
+    if (checkFields()) {
+      //bouton vert et actif
+      btnValider.style.backgroundColor = "#1D6154" 
+      btnValider.disabled = false
+    } else {
+      //bouton gris et désactivé
+      btnValider.style.backgroundColor = "#A7A7A7"
+      btnValider.disabled = true
+    }
+  }
 
-      await addWork() //ajouter nv work avec await pour attendre la fin de l'ajout
+  //** Réinitialiser le formulaire
+  function resetForm() {
+    form.reset()                          // titleInput.value = '' // categorySelect.value = ''
+    fileInput.value = ''                  // Vide valeur de fichier
+    previewImg.style.display = "none"     // Cache l'aperçu de l'image
+    previewImg.src = ''                   // Efface la source de l'image prévisualisée
+    fileIcon.style.display = ""
+    fileLabel.style.display = ""
+    fileMaxSize.style.display = ""
+    updateButtonState()                   // Rafraichit l'état du bouton
+  }
 
-      // message après l'ajout
+  //** Mise à jour de bouton Lorsque les champs sont remplis
+  [titleInput, categorySelect, fileInput].forEach(input => {
+    input.addEventListener('change', updateButtonState)
+    input.addEventListener('input', updateButtonState)
+  })
+
+  //** Mise à jour de bouton à la soumission du formulaire
+  updateButtonState()
+
+  //** clic bouton Valider
+  btnValider.addEventListener("click", async function (event) {
+      event.preventDefault() // Empêcher la soumission par défaut du formulaire
+
+       // verification Si les champs sont remplissés 
+      if (!checkFields()) {
+        return
+      }
+      // Ajouter le nouveau travail
+      await addWork() 
+
+      // Afficher le message de succès
       const message = document.createElement('div')
       message.textContent = "Le work a été ajouté avec succès !"
       message.classList.add('message_ajout')
       modalContent1.appendChild(message)
-      setTimeout(() => message.remove(), 2000) // Le message disparaît après 2 secondes
+      setTimeout(() => message.remove(), 2000)  //Le message disparaît après 2 secondes
 
-      //vider champs formulaire// vider champs aprés ajout nouvelle work
-      fileIcon.style.display = ""
-      fileLabel.style.display = ""
-      fileMaxSize.style.display = ""  
-      previewImg.style.display = "none" 
-      titleInput.value = ''
-      categorySelect.value = ''
-      btnValider.style.backgroundColor = "#A7A7A7" 
-      //vider event click pour ajouter nv work
-      // btnValider.removeEventListener("click", addWork)
+      // Réinitialiser le formulaire
+      resetForm()
 
-      //appel Api pour recharger la liste des works
+      // Recharger la liste des travaux
       await getWorks()
+  })
+}
 
-    } )
-    }
+
+
+
+
+
+
+//*** Event retour à la modale précédente
+function eventBack() {
+  const modal = document.querySelector('.modal')
+  const backBtn = document.getElementById('back_btn')
+  const modifier = document.querySelector('.edit')
+
+  //click pour retourner à la modale 1
+  backBtn.addEventListener('click', async function() {
+    //supprimer la modale et puis recréer
+    modal.remove()
+    await getWorks();
+    createModal(modifier)
+  })
 }
 
 
@@ -707,9 +756,10 @@ function eventBack() {
   const modifier = document.querySelector('.edit')
 
   //click pour retourner à la modale 1
-    backBtn.addEventListener('click', function() {
-      //supprimer la modale et puis recréer 
+    backBtn.addEventListener('click', async function() {
+      //supprimer la modale et puis recréer
       modal.remove()
+      await getWorks();
       createModal(modifier)
     })
 }
@@ -729,4 +779,4 @@ async function init() {
   eventModeEdition()
 }
 // appel pour l'initialisation
-init(); 
+init()
