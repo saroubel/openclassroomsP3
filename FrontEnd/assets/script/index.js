@@ -396,11 +396,15 @@ async function deleteWork(id) {
 
       //appel fonction ajout les img avec les icônes delete
         addImgModal(galleryModal)
+      
+      //Mettre à jour la galerie principale après la suppression d'un work
+        const gallery = document.querySelector('.gallery')
+        gallery.innerHTML = ''
+        showAllWorks()
 
       //appel fonction event click suppression pour les icônes
         eventDeleteIcon()
 }
-
 
 
 
@@ -691,7 +695,7 @@ async function eventValider() {
         return
       }
       // Ajouter nv work
-      await addWork() 
+      await addWork()
 
       // Afficher message de succès
       const message = document.createElement('div')
