@@ -787,3 +787,24 @@ async function init() {
 }
 // appel pour l'initialisation
 init()
+
+
+
+
+
+
+
+
+//corriger les bugs de la formulaire Contact
+document.addEventListener('DOMContentLoaded', function() {
+  const contact = document.getElementById('contact')
+  if (contact) {
+      const inputs = contact.querySelectorAll('input:not([type="submit"]), textarea')
+      inputs.forEach(input => {
+          input.removeAttribute('name')
+      })
+  } else {
+      console.log('Section de contact non trouvée')
+  }
+})
+
