@@ -607,6 +607,22 @@ footer nav ul {
     /* border: 1px solid #1D6154; */
 }
 
+.message_ajout {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 1000; 			/* Assurez-vous que le message est au-dessus des autres éléments */
+    max-width: 80%; 		/* Limite la largeur du message */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+}
+
+
 
 
 

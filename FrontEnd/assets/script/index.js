@@ -565,6 +565,11 @@ function eventAddPhoto() {
             categorySelect.addEventListener("change", function () {
               eventValider()
               })
+            //remplir une option par défaut sans valeur 
+            const defaultOption = document.createElement("option")
+            defaultOption.value = ""
+            defaultOption.textContent = "Choisissez une catégorie"
+            categorySelect.appendChild(defaultOption)
             //remplir select avec les catégories
             for (let i = 0; i < categories.length; i++) {
                 const option = document.createElement("option")
@@ -614,44 +619,118 @@ function eventLoadImg() {
 }
 
 
-//*** Event boutton valider
+
+
+//*** Event bouton valider
 async function eventValider() {
-  //les champs à verifier sont remplis
-  const fileInput = document.getElementById("file")
+  // Les éléments à verifier sont remplis
+  const fileInput = document.getElementById("file") //où on lit l'image
   const titleInput = document.getElementById("title_input")
   const categorySelect = document.getElementById("category_select")
+  const form = document.getElementById("form")
   const btnValider = document.querySelector(".btn_valider")
-  //les champs à vider après l'ajout
+  // Les éléments à vider après l'ajout
   const previewImg = document.querySelector('.image_preview')
   const fileIcon = document.querySelector('.fa-image')
   const fileLabel = document.querySelector('.file_label')
   const fileMaxSize = document.querySelector('.max_size')
+  const modalContent1 = document.querySelector('.modal_content_1')
 
-  //vérifier que les champs sont remplis
-  if (titleInput.value === "" || categorySelect.value === "" || fileInput.value === "") 
-    //bouton reste gris
-    { btnValider.style.backgroundColor = "#A7A7A7" } 
-    else {  
-    //bouton en vert pour indiquer qu'il est valide + event click pour ajouter nv work
-    btnValider.style.backgroundColor = "#1D6154"
+  //** fonction pour Vérifier si tous les champs sont remplis avec des valeurs 
+  function checkFields() {
+    return titleInput.value.trim() !== "" && categorySelect.value !== "" && fileInput.files.length > 0  //au moins un fichier a été sélectionné
+  }
 
-    btnValider.addEventListener("click", async function () {
-      await addWork() //ajouter nv work avec await pour attendre la fin de l'ajout
+  //** fonction de Mise à jour l'état du bouton si cliquable ou pas
+  function updateButtonState() {
 
-      //vider champs formulaire// vider champs aprés ajout nouvelle work
-      fileIcon.style.display = ""
-      fileLabel.style.display = ""
-      fileMaxSize.style.display = ""  
-      previewImg.style.display = "none" 
-      titleInput.value = ''
-      categorySelect.value = ''
-
-      //appel Api pour recharger la liste des works
-      await getWorks()
-
-    } )
+    if (checkFields()) { 
+      //bouton vert et actif si tt est rempli
+      btnValider.style.backgroundColor = "#1D6154" 
+      btnValider.disabled = false
+    } else {
+      //bouton gris et désactivé
+      btnValider.style.backgroundColor = "#A7A7A7"
+      btnValider.disabled = true
     }
+  }
+
+  //** fonction pour Réinitialiser le formulaire aprés le click
+  function resetForm() {
+    form.reset()                          // titleInput.value = '' // categorySelect.value = ''
+    fileInput.value = ''                  // Vide valeur de fichier
+    previewImg.style.display = "none"     // Cache l'aperçu de l'image
+    previewImg.src = ''                   // Efface la source de l'image prévisualisée
+    fileIcon.style.display = ""
+    fileLabel.style.display = ""
+    fileMaxSize.style.display = ""
+    updateButtonState()                   // Rafraichit l'état du bouton
+  }
+
+  //** Mise à jour des évenements si les champs sont remplis
+  [titleInput, categorySelect, fileInput].forEach(input => {
+    input.addEventListener('change', updateButtonState)
+    input.addEventListener('input', updateButtonState)
+  })
+  // autre methode de mise à jour des event 
+  // titleInput.addEventListener('change', updateButtonState)    // change pour des update avec le clavier
+  // titleInput.addEventListener('input', updateButtonState)     // input pour des update avec la souris
+  // categorySelect.addEventListener('change', updateButtonState)
+  // fileInput.addEventListener('change', updateButtonState)
+  //
+ 
+  updateButtonState()    //** Appel fonction Mise à jour de bouton
+  
+  //** click bouton Valider
+  btnValider.addEventListener("click", async function (event) {
+
+      event.preventDefault()  // Empêcher l'action par défaut tanque y'a pas de verification des champs
+
+       // verification Si les champs sont remplissés 
+      if (!checkFields()) {
+        return
+      }
+      // Ajouter nv work
+      await addWork() 
+
+      // Afficher message de succès
+      const message = document.createElement('div')
+      message.textContent = "Le work a été ajouté avec succès !"
+      message.classList.add('message_ajout')
+      modalContent1.appendChild(message)
+      setTimeout(() => message.remove(), 2000)  //Le message disparaît après 2 secondes
+
+      // Réinitialiser le formulaire
+      resetForm()
+
+      // Recharger la liste des travaux
+      await getWorks()
+  })
 }
+
+
+
+
+
+
+
+//*** Event retour à la modale précédente
+function eventBack() {
+  const modal = document.querySelector('.modal')
+  const backBtn = document.getElementById('back_btn')
+  const modifier = document.querySelector('.edit')
+
+  //click pour retourner à la modale 1
+  backBtn.addEventListener('click', async function() {
+    //supprimer la modale et puis recréer
+    modal.remove()
+    await getWorks();
+    createModal(modifier)
+  })
+}
+
+
+
 
 
 //*** Ajouter nouvelle work + appel API 
@@ -676,6 +755,7 @@ async function addWork() {
 }
 
 
+
 //*** Event retour à la modale précédente
 function eventBack() {
   const modal = document.querySelector('.modal')
@@ -683,9 +763,10 @@ function eventBack() {
   const modifier = document.querySelector('.edit')
 
   //click pour retourner à la modale 1
-    backBtn.addEventListener('click', function() {
-      //supprimer la modale et puis recréer 
+    backBtn.addEventListener('click', async function() {
+      //supprimer la modale et puis recréer
       modal.remove()
+      await getWorks();
       createModal(modifier)
     })
 }
@@ -705,4 +786,4 @@ async function init() {
   eventModeEdition()
 }
 // appel pour l'initialisation
-init(); 
+init()
