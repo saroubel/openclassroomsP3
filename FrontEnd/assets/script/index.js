@@ -623,28 +623,29 @@ function eventLoadImg() {
 
 //*** Event bouton valider
 async function eventValider() {
-  // Les éléments du formulaire
-  const fileInput = document.getElementById("file")
+  // Les éléments à verifier sont remplis
+  const fileInput = document.getElementById("file") //où on lit l'image
   const titleInput = document.getElementById("title_input")
   const categorySelect = document.getElementById("category_select")
   const form = document.getElementById("form")
   const btnValider = document.querySelector(".btn_valider")
-  // Les éléments à manipuler après l'ajout
+  // Les éléments à vider après l'ajout
   const previewImg = document.querySelector('.image_preview')
   const fileIcon = document.querySelector('.fa-image')
   const fileLabel = document.querySelector('.file_label')
   const fileMaxSize = document.querySelector('.max_size')
   const modalContent1 = document.querySelector('.modal_content_1')
 
-  //** Vérifier si tous les champs sont remplis
+  //** fonction pour Vérifier si tous les champs sont remplis avec des valeurs 
   function checkFields() {
-    return titleInput.value.trim() !== "" && categorySelect.value !== "" && fileInput.files.length > 0 
+    return titleInput.value.trim() !== "" && categorySelect.value !== "" && fileInput.files.length > 0  //au moins un fichier a été sélectionné
   }
 
-  //** Mise à jour l'état du bouton 
+  //** fonction de Mise à jour l'état du bouton si cliquable ou pas
   function updateButtonState() {
-    if (checkFields()) {
-      //bouton vert et actif
+
+    if (checkFields()) { 
+      //bouton vert et actif si tt est rempli
       btnValider.style.backgroundColor = "#1D6154" 
       btnValider.disabled = false
     } else {
@@ -654,7 +655,7 @@ async function eventValider() {
     }
   }
 
-  //** Réinitialiser le formulaire
+  //** fonction pour Réinitialiser le formulaire aprés le click
   function resetForm() {
     form.reset()                          // titleInput.value = '' // categorySelect.value = ''
     fileInput.value = ''                  // Vide valeur de fichier
@@ -666,27 +667,33 @@ async function eventValider() {
     updateButtonState()                   // Rafraichit l'état du bouton
   }
 
-  //** Mise à jour de bouton Lorsque les champs sont remplis
+  //** Mise à jour des évenements si les champs sont remplis
   [titleInput, categorySelect, fileInput].forEach(input => {
     input.addEventListener('change', updateButtonState)
     input.addEventListener('input', updateButtonState)
   })
-
-  //** Mise à jour de bouton à la soumission du formulaire
-  updateButtonState()
-
-  //** clic bouton Valider
+  // autre methode de mise à jour des event 
+  // titleInput.addEventListener('change', updateButtonState)    // change pour des update avec le clavier
+  // titleInput.addEventListener('input', updateButtonState)     // input pour des update avec la souris
+  // categorySelect.addEventListener('change', updateButtonState)
+  // fileInput.addEventListener('change', updateButtonState)
+  //
+ 
+  updateButtonState()    //** Appel fonction Mise à jour de bouton
+  
+  //** click bouton Valider
   btnValider.addEventListener("click", async function (event) {
-      event.preventDefault() // Empêcher la soumission par défaut du formulaire
+
+      event.preventDefault()  // Empêcher l'action par défaut tanque y'a pas de verification des champs
 
        // verification Si les champs sont remplissés 
       if (!checkFields()) {
         return
       }
-      // Ajouter le nouveau travail
+      // Ajouter nv work
       await addWork() 
 
-      // Afficher le message de succès
+      // Afficher message de succès
       const message = document.createElement('div')
       message.textContent = "Le work a été ajouté avec succès !"
       message.classList.add('message_ajout')
