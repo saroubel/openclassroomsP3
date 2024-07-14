@@ -204,6 +204,10 @@ function isAdmin() {
     //Modifier txt login -> logout
     loginLink.textContent = 'logout'
 
+    //Cacher menu de filtre
+    const filters = document.querySelector('.filters')
+    filters.style.display = "none"
+
     //clique sur logout pour se deconnecter
     loginLink.addEventListener('click', function () {
       logout()
