@@ -1,12 +1,9 @@
 //------Vérification du mail
 function checkEmail() {
-
-    // récup valeur email avec id (email-bar) et la stocke dans la variable "email"
-    const email = document.getElementById("email-bar").value
-    
-    // Regex pour valider le format d'une adresse e-mail 
+    // récup valeur email
+    const email = this.value
+    // valider le format mail
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        // au moins un caractère @ et un caractère 
     
     if (!regex.test(email)) {
         alert("Please enter a valid email address")
@@ -18,15 +15,11 @@ function checkEmail() {
 
 //------Vérification du mot de passe
 function checkPassword() {
-
-    // récup valeur passwords avec id (password-bar) et la stocke dans la variable "password"
-    const password = document.getElementById("password-bar").value
-
-    // Regex pour un mot de passe valide
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$/
-        // au moins un chiffre, minuscule, majuscule, 
-        // au moins un caractère alphanumérique, longueur au moins 4 caractères et $ fin de la chaine
-
+    // récup valeur passwords
+    const password = this.value    
+    // valider format pswrd 
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$/   
+    
     if (!regex.test(password)) {
         alert("Please enter a valid password")
     }
@@ -34,6 +27,15 @@ function checkPassword() {
 
 
 
+
+//------initialiser les validations
+function initialiseValidation() {
+    const emailInput = document.getElementById("email-bar")
+    const passwordInput = document.getElementById("password-bar")
+
+    emailInput.addEventListener('change', checkEmail)
+    passwordInput.addEventListener('change', checkPassword)
+}
 
 
 
@@ -90,8 +92,13 @@ function login() {
 }
 
 
-// appel de la fonction pour se connecter
-login()
+
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    initialiseValidation()
+    login()
+})
 
 
 

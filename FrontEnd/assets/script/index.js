@@ -326,7 +326,7 @@ function openModal(modal) {
 
 
 //*** Fermeture de la modale
-  //async pour waiter l'envoi de getWorks
+  //async pour attendre l'envoi de getWorks
 async function closeModal(modal) {
   modal.style.display = 'none'
 
@@ -709,10 +709,13 @@ async function eventValider() {
 
       // Recharger la liste des travaux
       await getWorks()
+
+      //mise à jour de la galerie principale
+      // const gallery = document.querySelector('.gallery')
+      // gallery.innerHTML = ''
+      // showAllWorks()
   })
 }
-
-
 
 
 
