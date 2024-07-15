@@ -601,10 +601,18 @@ function eventAddPhoto() {
 function eventLoadImg() {
 
     const fileInput = document.querySelector('#file') 
+    const maxSize = 4 * 1024 * 1024 // 4Mo Taille max autorisée
+
     //changement fichier dans input
     fileInput.addEventListener('change', function () {
         //Créer fichier pour lire l'img
         const file = this.files[0]
+        //verifier taille img
+        if (file.size > maxSize) {
+            alert("La taille de l'image ne doit pas dépasser 4Mo")
+            this.value = ''
+            return
+        }
         const reader = new FileReader()
         //lire emplacement img
         reader.readAsDataURL(file)
@@ -637,12 +645,14 @@ async function eventValider() {
   const categorySelect = document.getElementById("category_select")
   const form = document.getElementById("form")
   const btnValider = document.querySelector(".btn_valider")
+
   // Les éléments à vider après l'ajout
   const previewImg = document.querySelector('.image_preview')
   const fileIcon = document.querySelector('.fa-image')
   const fileLabel = document.querySelector('.file_label')
   const fileMaxSize = document.querySelector('.max_size')
   const modalContent1 = document.querySelector('.modal_content_1')
+
 
   //** fonction pour Vérifier si tous les champs sont remplis avec des valeurs 
   function checkFields() {
