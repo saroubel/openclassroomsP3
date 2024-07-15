@@ -637,6 +637,8 @@ function eventLoadImg() {
 
 
 
+let isWorkAdded = false // variable pour vérifier si addwork est déja exécuté ou pas
+
 //*** Event bouton valider
 async function eventValider() {
   // Les éléments à verifier sont remplis
@@ -645,14 +647,12 @@ async function eventValider() {
   const categorySelect = document.getElementById("category_select")
   const form = document.getElementById("form")
   const btnValider = document.querySelector(".btn_valider")
-
   // Les éléments à vider après l'ajout
   const previewImg = document.querySelector('.image_preview')
   const fileIcon = document.querySelector('.fa-image')
   const fileLabel = document.querySelector('.file_label')
   const fileMaxSize = document.querySelector('.max_size')
   const modalContent1 = document.querySelector('.modal_content_1')
-
 
   //** fonction pour Vérifier si tous les champs sont remplis avec des valeurs 
   function checkFields() {
@@ -704,11 +704,10 @@ async function eventValider() {
 
       event.preventDefault()  // Empêcher l'action par défaut tanque y'a pas de verification des champs
 
-       // verification Si les champs sont remplissés 
-      if (!checkFields()) {
-        return
-      }
-      // Ajouter nv work
+      // verification Si les champs sont remplissés et si le work n'est pas ajouté
+      if (isWorkAdded === true ||!checkFields()) 
+        { return }
+      isWorkAdded = true // pour ne pas redéclencher l'ajout work
       await addWork()
 
       // Afficher message de succès
@@ -724,32 +723,13 @@ async function eventValider() {
       // Recharger la liste des travaux
       await getWorks()
 
-      //mise à jour de la galerie principale
-      // const gallery = document.querySelector('.gallery')
-      // gallery.innerHTML = ''
-      // showAllWorks()
+      // mise à jour de la galerie principale
+      const gallery = document.querySelector('.gallery')
+      gallery.innerHTML = ''
+      showAllWorks()
+      isWorkAdded = false
   })
 }
-
-
-
-
-
-//*** Event retour à la modale précédente
-function eventBack() {
-  const modal = document.querySelector('.modal')
-  const backBtn = document.getElementById('back_btn')
-  const modifier = document.querySelector('.edit')
-
-  //click pour retourner à la modale 1
-  backBtn.addEventListener('click', async function() {
-    //supprimer la modale et puis recréer
-    modal.remove()
-    await getWorks();
-    createModal(modifier)
-  })
-}
-
 
 
 
@@ -768,12 +748,13 @@ async function addWork() {
     formData.append("category", categorySelect.value)
 
     //**appel API de work POST + autorisation avec le token */
-      fetch(`http://localhost:5678/api/works`, {
+       await fetch(`http://localhost:5678/api/works`, {
         method: "POST",             
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData
       })   
 }
+
 
 
 
@@ -791,6 +772,8 @@ function eventBack() {
       createModal(modifier)
     })
 }
+
+
 
 
 
