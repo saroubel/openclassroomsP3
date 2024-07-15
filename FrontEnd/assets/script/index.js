@@ -204,6 +204,10 @@ function isAdmin() {
     //Modifier txt login -> logout
     loginLink.textContent = 'logout'
 
+    //Cacher menu de filtre
+    const filters = document.querySelector('.filters')
+    filters.style.display = "none"
+
     //clique sur logout pour se deconnecter
     loginLink.addEventListener('click', function () {
       logout()
@@ -326,7 +330,7 @@ function openModal(modal) {
 
 
 //*** Fermeture de la modale
-  //async pour waiter l'envoi de getWorks
+  //async pour attendre l'envoi de getWorks
 async function closeModal(modal) {
   modal.style.display = 'none'
 
@@ -597,10 +601,18 @@ function eventAddPhoto() {
 function eventLoadImg() {
 
     const fileInput = document.querySelector('#file') 
+    const maxSize = 4 * 1024 * 1024 // 4Mo Taille max autorisée
+
     //changement fichier dans input
     fileInput.addEventListener('change', function () {
         //Créer fichier pour lire l'img
         const file = this.files[0]
+        //verifier taille img
+        if (file.size > maxSize) {
+            alert("La taille de l'image ne doit pas dépasser 4Mo")
+            this.value = ''
+            return
+        }
         const reader = new FileReader()
         //lire emplacement img
         reader.readAsDataURL(file)
@@ -624,6 +636,8 @@ function eventLoadImg() {
 
 
 
+
+let isWorkAdded = false // variable pour vérifier si addwork est déja exécuté ou pas
 
 //*** Event bouton valider
 async function eventValider() {
@@ -690,11 +704,10 @@ async function eventValider() {
 
       event.preventDefault()  // Empêcher l'action par défaut tanque y'a pas de verification des champs
 
-       // verification Si les champs sont remplissés 
-      if (!checkFields()) {
-        return
-      }
-      // Ajouter nv work
+      // verification Si les champs sont remplissés et si le work n'est pas ajouté
+      if (isWorkAdded === true ||!checkFields()) 
+        { return }
+      isWorkAdded = true // pour ne pas redéclencher l'ajout work
       await addWork()
 
       // Afficher message de succès
@@ -709,30 +722,14 @@ async function eventValider() {
 
       // Recharger la liste des travaux
       await getWorks()
+
+      // mise à jour de la galerie principale
+      const gallery = document.querySelector('.gallery')
+      gallery.innerHTML = ''
+      showAllWorks()
+      isWorkAdded = false
   })
 }
-
-
-
-
-
-
-
-//*** Event retour à la modale précédente
-function eventBack() {
-  const modal = document.querySelector('.modal')
-  const backBtn = document.getElementById('back_btn')
-  const modifier = document.querySelector('.edit')
-
-  //click pour retourner à la modale 1
-  backBtn.addEventListener('click', async function() {
-    //supprimer la modale et puis recréer
-    modal.remove()
-    await getWorks();
-    createModal(modifier)
-  })
-}
-
 
 
 
@@ -751,12 +748,13 @@ async function addWork() {
     formData.append("category", categorySelect.value)
 
     //**appel API de work POST + autorisation avec le token */
-      fetch(`http://localhost:5678/api/works`, {
+       await fetch(`http://localhost:5678/api/works`, {
         method: "POST",             
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData
       })   
 }
+
 
 
 
@@ -774,6 +772,8 @@ function eventBack() {
       createModal(modifier)
     })
 }
+
+
 
 
 
